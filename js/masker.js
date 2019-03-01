@@ -41,7 +41,7 @@ function checkURL(url) {
 }
 
 function requiresResize(id, md) {
-  if (1.2*id > md)
+  if (1.3*id > md)
     return true;
   else
     return false;
@@ -129,10 +129,10 @@ function loadMask(selectedMask) {
     mask.set('opacity', alpha);
     maskImage = mask;
     if (requiresResize(canvasWidth, mask.width)) {
-      maskImage.set('scaleX', realCanvas.width / mask.width);
+      maskImage.set('scaleX', 1.3*realCanvas.width / mask.width);
     }
     if(requiresResize(canvasHeight, mask.height)) {
-      maskImage.set('scaleY', realCanvas.height / mask.height);
+      maskImage.set('scaleY', 1.3*realCanvas.height / mask.height);
     }
     if (requiresMinimize(canvasWidth, mask.width)) {
       maskImage.set('scaleX', 0.5);
@@ -205,4 +205,10 @@ function checkRIS() {
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&pageurl=http%3A%2F%2Fwww.squobble.com&imgurl="+url);
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url="+url);
   window.open("http://www.tineye.com/search/?url="+url);
+}
+
+function updateSlider(){
+  var text = document.getElementById("sliderValue");
+  var slider = document.getElementById("alpha");
+  text.innerText=slider.value;
 }

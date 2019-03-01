@@ -1,7 +1,7 @@
 body {
     font-family: "Roboto", "Arial", sans-serif;
 	margin: 1%;
-	background-color:#eee;
+	background-color:rgb(240, 236, 228);
 }
 
 #uploadlabel {
@@ -46,13 +46,22 @@ img:hover{
     border-radius: 5px;
     padding: 6px;
     padding-left: 12px;
-    margin: 0px;
+	margin: 0px;
+	background:  rgb(247, 229, 205);
     
 }
 
 #alpha {
-    margin-top: 3px;
+	margin-top: 3px;
+	display:inline-block;
 }
+
+#sliderValue{
+	display: inline;
+	font-size: 3em;
+}
+
+
 
 #masks {
     margin-top: -8px;
@@ -60,7 +69,8 @@ img:hover{
     border-radius: 5px;
     display: inline-block;
     padding: 6px;
-    padding-left: 12px;
+	padding-left: 12px;
+	background: rgb(247, 229, 205);
 }
 
 #preview {
