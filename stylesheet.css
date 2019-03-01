@@ -64,13 +64,13 @@ img:hover{
 	height: 10px;
 	border: none;
 	opacity: 0.5;
-	width: 70%;
+	width: 50%;
 }
 
 #alpha::-webkit-slider-thumb{
 	-webkit-appearance: none;
 	appearance: none;
-	background: rgb(252, 101, 101);
+	background: rgb(224, 146, 82);
 	width: 5px;
 	height: 20px;
 }
