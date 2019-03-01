@@ -8,7 +8,7 @@ body {
     display: block;
 	text-align: center;
     font-size: 3vw;
-	color:#000;
+	color:rgb(63, 63, 63);
 	margin: auto;
     width: 75%;
     height: 50%;
@@ -48,17 +48,39 @@ img:hover{
     padding-left: 12px;
 	margin: 0px;
 	background:  rgb(247, 229, 205);
+	line-height: 30px;
     
 }
 
 #alpha {
 	margin-top: 3px;
 	display:inline-block;
+	line-height: 0;
+
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #ffd586;
+	outline: none;
+	height: 10px;
+	border: none;
+	opacity: 0.5;
+	width: 70%;
+}
+
+#alpha::-webkit-slider-thumb{
+	-webkit-appearance: none;
+	appearance: none;
+	background: rgb(252, 101, 101);
+	width: 5px;
+	height: 20px;
 }
 
 #sliderValue{
-	display: inline;
-	font-size: 3em;
+	display: inline-block;
+	line-height: 0;
+	margin-top: 0.75em;
+	vertical-align: top;
+	font-size: 1.5em;
 }
 
 
