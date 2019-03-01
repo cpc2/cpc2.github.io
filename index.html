@@ -16,11 +16,15 @@
     </label>
     <input type="file" id="imageUpload" style="display: none;" onchange="uploadImage(event)">
   </div>
+  <!--
+  <div>
+    <input id="pastedURL" type="url"> <br>
+    <button onclick="submitURL()" type="button">Upload</button>
+  </div> -->
   <div id="container">
     <div id="masker">
       <div id="tools">
         Set Opacity (0-100):
-        <!--<input type='text' id='alpha' value=100>-->
         <br>
         <div id="slider">
           <input type="range" min="0" max="100" value="100" id="alpha" oninput="updateSlider()">

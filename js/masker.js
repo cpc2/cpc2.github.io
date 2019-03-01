@@ -6,6 +6,8 @@ var realCanvas = new fabric.Canvas("realCanvas");
 document.getElementById('container').style.display = "none";
 
 
+//var brush = new fabric.PencilBrush(realCanvas);
+//brush.onMouseDown({x:points[0][0], y:points[0][1]});
 
 $("html").on("paste",function(event){
   if(event.originalEvent.clipboardData){
@@ -29,6 +31,12 @@ $("html").on("paste",function(event){
     }
   }
 });
+
+function submitURL(){
+  var pastedURL = document.getElementById("pastedURL");
+  var urlString = pastedURL.value;
+  checkURL(urlString);
+}
 
 function addProxyToUrl(baseUrl) {
   return url = "https://cors-anywhere.herokuapp.com/" + baseUrl.replace(/(^\w+:|^)\/\//, '');
