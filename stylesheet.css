@@ -27,7 +27,7 @@ body {
 	display: block;
 }
 
-br~img{
+br~img, label img{
 	transition: 0.5s;
 	border-radius: 5%;
 }
