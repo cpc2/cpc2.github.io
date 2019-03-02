@@ -165,6 +165,7 @@ function loadMask(selectedMask) {
   document.getElementById('uploadedUrl').style.display = "none";
   document.getElementById('copyToClipboard').style.display = "none";
   document.getElementById('checkForRIS').style.display = "none";
+  document.getElementById('PostReddit').style.display = "none";
   updatePreview();
 }
 
@@ -193,6 +194,7 @@ function upload() {
           document.getElementById('uploadedUrl').style.display = "inline-block";
           document.getElementById('copyToClipboard').style.display = "inline-block";
           document.getElementById('checkForRIS').style.display = "inline-block";
+          document.getElementById('PostReddit').style.display = "inline-block";
       } else {
         alert("Failed to upload.");
       }
@@ -220,4 +222,30 @@ function updateSlider(){
   var text = document.getElementById("sliderValue");
   var slider = document.getElementById("alpha");
   text.innerText=slider.value;
+}
+
+function getRoundNumber() {
+  var request = new XMLHttpRequest();
+  request.open("GET", "https://api.picturegame.co/current", true);
+  request.onload = () => {
+      var text = request.responseText
+      var i = text.search("roundNumber\":");
+      var roundNumber = text.substr(i + 13, 5);
+      var nextRound = parseInt(roundNumber) + 1;
+      localStorage.setItem('round', nextRound);
+  }
+  request.send();
+}
+
+function postReddit(){
+  //I know this is awful
+  getRoundNumber();
+  setTimeout(createLink,600);
+  function createLink(){
+    var number = localStorage.getItem('round');
+    var round = "[Round " + number + "]";
+    var imageLink = document.getElementById("uploadedUrl").value;
+    var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round;
+    window.open(redditLink);
+  }
 }
