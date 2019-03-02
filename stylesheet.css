@@ -100,7 +100,7 @@ img:hover{
 }
 
 #container {
-	display: grid;
+	display: none;
 	grid-gap: 10px;
 	grid-template-columns: 325px auto;
 	grid-template-areas: 
