@@ -143,12 +143,13 @@ function loadMask(selectedMask) {
     if(requiresResize(canvasHeight, mask.height)) {
       maskImage.set('scaleY', 1.3*realCanvas.height / mask.height);
     }
-    if (requiresMinimize(canvasWidth, mask.width)) {
+    if (requiresMinimize(canvasWidth, mask.width) || requiresMinimize(canvasHeight, mask.height)) {
       maskImage.set('scaleX', 0.5);
-    }
-    if(requiresMinimize(canvasHeight, mask.height)) {
       maskImage.set('scaleY', 0.5);
     }
+    /*if(requiresMinimize(canvasHeight, mask.height)) {
+      maskImage.set('scaleY', 0.5);
+    }*/
     maskImage.rotate(Math.random()*4 - 2);
     maskImage.set({transformMatrix: [ 1, Math.random()/5, Math.random()/5, 1, 0, 0 ]});
     maskImage.set('originX', 'center');
@@ -243,7 +244,7 @@ function postReddit(){
   setTimeout(createLink,600);
   function createLink(){
     var number = localStorage.getItem('round');
-    var round = "[Round " + number + "]";
+    var round = "[Round " + number + "] ";
     var imageLink = document.getElementById("uploadedUrl").value;
     var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round;
     window.open(redditLink);
