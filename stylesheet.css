@@ -151,19 +151,20 @@ img:hover{
 #mobilePaste input{
 	background-color :rgb(240, 214, 181);
 	border: none;
-	width: 20vw;
-	height: 50px;
+	width: 40vw;
+	height: 75px;
 	color:rgb(63, 63, 63);
-	padding: 5px;
+	padding: 10px;
 	margin-bottom: 10px;
+	font-size: 150%
 }
 
-#mobilePaste button{
+/*#mobilePaste button{
 	border: none;
 	background-color :rgb(226, 207, 182);
 	color:rgb(63, 63, 63);
 	height: 60px;
-}
+}*/
 
 @media screen and (max-aspect-ratio: 11/16) {
 	#mobilePaste{

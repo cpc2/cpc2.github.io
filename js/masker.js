@@ -32,11 +32,11 @@ $("html").on("paste",function(event){
   }
 });
 
-function submitURL(){
+/*function submitURL(){
   var pastedURL = document.getElementById("pastedURL");
   var urlString = pastedURL.value;
   checkURL(urlString);
-}
+}*/
 
 function addProxyToUrl(baseUrl) {
   return url = "https://cors-anywhere.herokuapp.com/" + baseUrl.replace(/(^\w+:|^)\/\//, '');
@@ -112,6 +112,7 @@ function loadSourceImage(baseUrl, externalImage) {
     });
   }
   document.getElementById('uploader').style.display = "none";
+  document.getElementById('mobilePaste').style.display = "none";
   document.getElementById('container').style.display = "grid";
 }
 
