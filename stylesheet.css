@@ -59,12 +59,18 @@ img:hover{
 
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: #ffd586;
+	background-color:rgb(231, 199, 173);
 	outline: none;
 	height: 10px;
 	border: none;
 	opacity: 0.5;
 	width: 50%;
+	padding: 10px;
+	transition: 0.5s;
+}
+
+#alpha:hover{
+	background-color:rgb(236, 212, 192);
 }
 
 #alpha::-webkit-slider-thumb{
@@ -145,13 +151,6 @@ img:hover{
 
 #roundTitle::placeholder{
 	color: white;
-}
-
-#alpha{
-	background-color:#ccc;
-	color: rgb(26, 26, 26);
-	border: none;
-	padding: 10px;
 }
 
 #mobilePaste{
