@@ -15,7 +15,8 @@ body {
 	margin-top: 25vh;
 	line-height: 5em;
 	background-color: rgb(240, 214, 181);
-    transition: 0.5s;
+	transition: 0.5s;
+	border-radius: 20px;
 }
 
 #uploadlabel:hover{
@@ -90,7 +91,6 @@ img:hover{
 }
 
 
-
 #masks {
     margin-top: -8px;
     border: 2px solid #555;
@@ -147,6 +147,10 @@ img:hover{
 	color: white;
 	padding: 10px;
 	display: none;
+}
+
+#PostReddit{
+	margin-top: 10px;
 }
 
 #roundTitle::placeholder{
