@@ -4,8 +4,9 @@ This is a fork of imagemasker.github.io with updated CSS, mask rotation and expe
 
 ## TODO
 
-* Update mask opacity live with slider
-* Draw over the image (draw a mask over the image too?)
+* **Update mask opacity live with slider**
+* **Draw over the image** (draw a mask over the image too?)
 * Resize mask with mouse wheel
-* Save images + title to localstorage
+* Drag and drop files
+* **Save images + title to localstorage**
 * More editing tools? (as long as it doesn't get too heavy)
