@@ -141,7 +141,7 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle{
+#roundTitle, #uploadedUrl{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
