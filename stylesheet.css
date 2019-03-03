@@ -135,6 +135,18 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
+#roundTitle{
+	border: none;
+	background-color: rgb(238, 168, 150);
+	color: white;
+	padding: 10px;
+	display: none;
+}
+
+#roundTitle::placeholder{
+	color: white;
+}
+
 #alpha{
 	background-color:#ccc;
 	color: rgb(26, 26, 26);

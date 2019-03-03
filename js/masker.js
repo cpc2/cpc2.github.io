@@ -167,6 +167,7 @@ function loadMask(selectedMask) {
   document.getElementById('copyToClipboard').style.display = "none";
   document.getElementById('checkForRIS').style.display = "none";
   document.getElementById('PostReddit').style.display = "none";
+  document.getElementById('roundTitle').style.display = "none";
   updatePreview();
 }
 
@@ -196,6 +197,7 @@ function upload() {
           document.getElementById('copyToClipboard').style.display = "inline-block";
           document.getElementById('checkForRIS').style.display = "inline-block";
           document.getElementById('PostReddit').style.display = "inline-block";
+          document.getElementById('roundTitle').style.display = "inline-block";
       } else {
         alert("Failed to upload.");
       }
@@ -246,7 +248,8 @@ function postReddit(){
     var number = localStorage.getItem('round');
     var round = "[Round " + number + "] ";
     var imageLink = document.getElementById("uploadedUrl").value;
-    var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round;
+    var roundTitle = document.getElementById("roundTitle").value;
+    var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
     window.open(redditLink);
   }
 }
