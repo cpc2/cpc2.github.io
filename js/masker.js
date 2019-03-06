@@ -249,3 +249,66 @@ function postReddit() {
   var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
   window.open(redditLink);
 }
+
+function saveImage() {
+  //Future: save answer too
+  var imageURL = document.getElementById("uploadedUrl").value;
+  var roundTitle = document.getElementById("roundTitle").value;
+  if (localStorage.getItem('images') == null) {
+    localStorage.setItem('images', imageURL);
+    localStorage.setItem('titles', roundTitle)
+  } else {
+    var images = localStorage.getItem('images');
+    var titles = localStorage.getItem('titles');
+    images += ";" + imageURL;
+    titles += ";" + titles;
+    localStorage.setItem('images', images);
+    localStorage.setItem('titles', titles);
+  }
+}
+
+var i=0;
+//What a mess...
+function displaySavedRounds(direction) {
+  if (localStorage.getItem('images') == null || localStorage.getItem('titles') == null) {
+    alert("There are no saved images!");
+  }
+  else {
+    if (direction == 1) {
+      i--;
+    } else if (direction == 2) {
+      i++;
+    } else if (direction == 0) {
+      i = 0;
+      getRoundNumber();
+    }
+
+    document.getElementById("savedRounds").style.display="block";
+    var image = document.getElementById("displayedImage");
+    var images = localStorage.getItem('images');
+    var imagesArray = images.split(";");
+    image.src = imagesArray[i];
+
+    var title = document.getElementById("displayedTitle")
+    var titles = localStorage.getItem('titles')
+    var titlesArray = titles.split(";");
+    title.value = titlesArray[i];
+
+    if(i<=0){
+      var left = document.getElementById("left");
+      //left.style.display="none";
+      left.style.visibility="hidden";
+      document.getElementById("right").style.visibility="visible";
+    } else if(i>imagesArray.length-2){
+      var right = document.getElementById("right");
+      //right.style.display="none";
+      right.style.visibility="hidden";
+      document.getElementById("left").style.visibility="visible";
+    } else{
+      document.getElementById("left").style.visibility="visible";
+      document.getElementById("right").style.visibility="visible";
+    }
+
+  }
+
+}

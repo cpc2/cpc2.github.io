@@ -105,6 +105,33 @@ img:hover{
 	grid-area: preview;
 }
 
+#left, #right{
+	display: inline-block;
+	border: none;
+	background-color: rgb(255, 167, 51);
+	padding: 6px;
+	font-size: 1.8em;
+	width: 45px;
+	height: 45px;
+	border-radius: 100%;
+	margin-top: 7%;
+}
+
+#left{
+	float: left;
+	margin-left: 30vw;
+}
+
+#right{
+	float: right;
+	margin-right: 30vw;
+}
+
+#displayedImage{
+	display: inline-block;
+	width: 30vw
+}
+
 #container {
 	display: none;
 	grid-gap: 10px;

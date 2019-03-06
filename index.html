@@ -21,6 +21,15 @@
     <input id="pastedURL" type="url" placeholder="Or paste the image URL here...">
     <!--<button onclick="submitURL()" type="button">Upload</button>-->
   </div>
+  <button id="displayRounds" type="button" onclick="displaySavedRounds(0)">Saved rounds</button>
+  <div id="savedRounds">
+    <button id="left" onclick="displaySavedRounds(1)"> ◀ </button>
+    <img id="displayedImage">
+    <button id="right" onclick="displaySavedRounds(2)"> ▶ </button>
+    <br>
+    <input id="displayedTitle" type="text">
+    <button onclick="postReddit()">Submit to /r/PictureGame</button>
+  </div> 
   <div id="container">
     <div id="masker">
       <div id="tools">
@@ -54,6 +63,7 @@
         <button type="button" id="checkForRIS" onclick="checkRIS()" style="display: none;">Check RIS</button>
         <input type="text" id="roundTitle" placeholder="Round Title">
         <button type="button" id="PostReddit" onclick="postReddit()" style="display: none;">Submit to /r/PictureGame</button>
+        <button type="button" id="Save" onclick="saveimage()" style="display: none;">Save round</button>
       </div>
       <div id="previewImage">
         <img id='imagePreview'>
