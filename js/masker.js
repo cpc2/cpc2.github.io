@@ -253,8 +253,8 @@ function postReddit(i) {
   var imageLink = document.getElementById("uploadedUrl").value;
   var roundTitle = document.getElementById("roundTitle").value;
   } else{
-    var imageLink = document.getElementById("uploadedUrl").value;
-    var roundTitle = document.getElementById("roundTitle").value;
+    var imageLink = document.getElementById("displayedImage").src;
+    var roundTitle = document.getElementById("displayedTitle").value;
   }
   var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
   window.open(redditLink);
