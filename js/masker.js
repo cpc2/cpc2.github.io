@@ -74,6 +74,7 @@ function updatePreview() {
 }
 
 function uploadImage(e) {
+  document.getElementById('savedRounds').style.display = "none";
   var filetype = e.target.files[0].type;
   url = URL.createObjectURL(e.target.files[0]);
   if (filetype == "image/png" || filetype == "image/jpeg") {
@@ -168,6 +169,8 @@ function loadMask(selectedMask) {
   document.getElementById('checkForRIS').style.display = "none";
   document.getElementById('PostReddit').style.display = "none";
   document.getElementById('roundTitle').style.display = "none";
+  document.getElementById('savedRounds').style.display = "none";
+  document.getElementById('displayRounds').style.display = "none";
   updatePreview();
 }
 
@@ -198,6 +201,7 @@ function upload() {
         document.getElementById('checkForRIS').style.display = "inline-block";
         document.getElementById('PostReddit').style.display = "inline-block";
         document.getElementById('roundTitle').style.display = "inline-block";
+        document.getElementById('Save').style.display = "inline-block";
       } else {
         alert("Failed to upload.");
       }

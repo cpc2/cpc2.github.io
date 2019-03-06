@@ -105,6 +105,10 @@ img:hover{
 	grid-area: preview;
 }
 
+#savedRounds{
+	display: none;
+}
+
 #left, #right{
 	display: inline-block;
 	border: none;
