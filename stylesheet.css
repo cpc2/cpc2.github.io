@@ -136,6 +136,19 @@ img:hover{
 	width: 30vw
 }
 
+#displayRounds{
+	border: none;
+	background-color: rgb(240, 214, 181);
+	color:rgb(63, 63, 63);
+	height: 40px;
+	border-radius: 5px;
+	position: relative;
+	left: 50%;
+	margin-top: 3em;
+	transform: translate(-50%, -50%);
+	font-size: 1.2em;
+}
+
 #container {
 	display: none;
 	grid-gap: 10px;
