@@ -19,7 +19,6 @@
   </div>
   <div id="mobilePaste">
     <input id="pastedURL" type="url" placeholder="Or paste the image URL here...">
-    <!--<button onclick="submitURL()" type="button">Upload</button>-->
   </div>
   <button id="displayRounds" type="button" onclick="displaySavedRounds(0)">Saved rounds</button>
   <div id="savedRounds">
@@ -28,7 +27,7 @@
     <button id="right" onclick="displaySavedRounds(2)"> ▶ </button>
     <br>
     <input id="displayedTitle" type="text">
-    <button onclick="postReddit()">Submit to /r/PictureGame</button>
+    <button onclick="postReddit(1)">Submit to /r/PictureGame</button>
   </div> 
   <div id="container">
     <div id="masker">
@@ -62,7 +61,7 @@
         <button type="button" id="copyToClipboard" onclick="copyUrl()" style="display: none;">Copy</button>
         <button type="button" id="checkForRIS" onclick="checkRIS()" style="display: none;">Check RIS</button>
         <input type="text" id="roundTitle" placeholder="Round Title">
-        <button type="button" id="PostReddit" onclick="postReddit()" style="display: none;">Submit to /r/PictureGame</button>
+        <button type="button" id="PostReddit" onclick="postReddit(2)" style="display: none;">Submit to /r/PictureGame</button>
         <button type="button" id="Save" onclick="saveImage()" style="display: none;">Save round</button>
       </div>
       <div id="previewImage">

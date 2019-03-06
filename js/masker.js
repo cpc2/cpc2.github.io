@@ -75,6 +75,7 @@ function updatePreview() {
 
 function uploadImage(e) {
   document.getElementById('savedRounds').style.display = "none";
+  document.getElementById('displayRounds').style.display = "none";
   var filetype = e.target.files[0].type;
   url = URL.createObjectURL(e.target.files[0]);
   if (filetype == "image/png" || filetype == "image/jpeg") {
@@ -245,11 +246,16 @@ function getRoundNumber() {
   request.send();
 }
 
-function postReddit() {
+function postReddit(i) {
   var number = sessionStorage.getItem('round');
   var round = "[Round " + number + "] ";
+  if (i == 2){
   var imageLink = document.getElementById("uploadedUrl").value;
   var roundTitle = document.getElementById("roundTitle").value;
+  } else{
+    var imageLink = document.getElementById("uploadedUrl").value;
+    var roundTitle = document.getElementById("roundTitle").value;
+  }
   var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
   window.open(redditLink);
 }
