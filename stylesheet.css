@@ -133,7 +133,8 @@ img:hover{
 
 #displayedImage{
 	display: inline-block;
-	width: 30vw
+	width: 30vw;
+	margin: 10px;
 }
 
 #displayRounds{
@@ -147,6 +148,13 @@ img:hover{
 	margin-top: 3em;
 	transform: translate(-50%, -50%);
 	font-size: 1.2em;
+}
+
+#displayedTitle, #PostReddit2{
+	position: relative;
+	left: 45%;
+	margin: 5px;
+	width: 200px;
 }
 
 #container {
@@ -170,7 +178,7 @@ img:hover{
 	display: none;
 }
 
-#buttons button, #buttons :first-child{
+#buttons button, #buttons :first-child, #PostReddit2{
 	background-color: rgb(236, 140, 116);
 	color: white;
 	border: none;
@@ -185,11 +193,14 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle, #uploadedUrl{
+#roundTitle, #uploadedUrl, #displayedTitle{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
 	padding: 10px;
+}
+
+#roundTitle, #uploadedUrl{
 	display: none;
 }
 

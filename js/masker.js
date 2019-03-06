@@ -74,8 +74,6 @@ function updatePreview() {
 }
 
 function uploadImage(e) {
-  document.getElementById('savedRounds').style.display = "none";
-  document.getElementById('displayRounds').style.display = "none";
   var filetype = e.target.files[0].type;
   url = URL.createObjectURL(e.target.files[0]);
   if (filetype == "image/png" || filetype == "image/jpeg") {
@@ -84,6 +82,8 @@ function uploadImage(e) {
 }
 
 function loadSourceImage(baseUrl, externalImage) {
+  document.getElementById('savedRounds').style.display = "none";
+  document.getElementById('displayRounds').style.display = "none";
   var resizeFactor = Math.random() * 0.1 + 0.9;
   if (externalImage == true) {
     sourceImageUrl = addProxyToUrl(baseUrl);
