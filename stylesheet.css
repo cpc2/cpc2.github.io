@@ -42,7 +42,7 @@ img:hover{
 }
 
 #tools {
-    height: 20%;
+    /*height: 20%;*/
     border: 2px solid #555;
     border-radius: 5px;
     padding: 6px;
@@ -54,7 +54,6 @@ img:hover{
 }
 
 #alpha, #zoom {
-	margin-top: 3px;
 	display:inline-block;
 	line-height: 0;
 
