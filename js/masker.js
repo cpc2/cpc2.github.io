@@ -162,6 +162,7 @@ function loadMask(selectedMask) {
     updatePreview();
   });
 
+  //it would be better to use a class and hide them in one line
   document.getElementById('uploadbutton').style.display = "inline-block";
   document.getElementById('uploadbutton').value = "Upload to Imgur";
   document.getElementById('uploadbutton').disabled = false;
