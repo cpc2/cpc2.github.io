@@ -38,12 +38,18 @@
           <input type="range" min="0" max="100" value="100" id="alpha" oninput="updateSlider()">
           <span id="sliderValue">100</span>
         </div>
+        <br>
+        <div id="zoomSlider">
+          Set mask zoom: <br>
+            <input type="range" min="0" max="100" value="50" id="zoom" oninput="updateZoomer()">
+            <!--<span id="zoomSliderValue">50</span>-->
+        </div>
       </div>
       <br>
       <div id="masks">
         Pick a mask:
         <br>
-        <img id="weave" width='145' height='145' src='images/1.png' onclick='loadMask(this)' />
+        <img width='145' height='145' src='images/1.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/2.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/3.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/4.png' onclick='loadMask(this)' />

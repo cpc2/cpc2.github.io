@@ -42,7 +42,7 @@ img:hover{
 }
 
 #tools {
-    height: 10%;
+    height: 20%;
     border: 2px solid #555;
     border-radius: 5px;
     padding: 6px;
@@ -53,7 +53,7 @@ img:hover{
     
 }
 
-#alpha {
+#alpha, #zoom {
 	margin-top: 3px;
 	display:inline-block;
 	line-height: 0;
@@ -70,11 +70,11 @@ img:hover{
 	transition: 0.5s;
 }
 
-#alpha:hover{
+#alpha:hover, #zoom:hover{
 	background-color:rgb(236, 212, 192);
 }
 
-#alpha::-webkit-slider-thumb{
+#alpha::-webkit-slider-thumb, #zoom::-webkit-slider-thumb{
 	-webkit-appearance: none;
 	appearance: none;
 	background: rgb(224, 146, 82);

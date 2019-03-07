@@ -2,7 +2,6 @@ var baseImage = null;
 var maskImage = null;
 var canvasHeight, canvasWidth;
 var mask = null;
-var maskoo;
 var imgInstance;
 var triangle;
 var realCanvas = new fabric.Canvas("realCanvas");
@@ -139,33 +138,7 @@ function loadMask(selectedMask) {
     realCanvas.remove(maskImage);
   }
 
-  /*triangle = new fabric.Triangle({
-    width: 100,
-    height: 100,
-    left: 100,
-    top: 100,
-    //selectable: false,
-    strokeWidth: 3,
-    fill: 'grey',
-    opacity: 1,
-    stroke: 'grey',
-    originX: 'center',
-    originY: 'center'
-  });
-  triangle.width = 200;
-  realCanvas.add(triangle);
-  realCanvas.requestRenderAll();*/
-
-  /*var imgElement = document.getElementById('weave');
-  imgInstance = new fabric.Image(imgElement, {
-    left: 100,
-    top: 100,
-    angle: 30,
-    opacity: 0.85
-  });
-  realCanvas.add(imgInstance);*/
-
-  maskoo = new fabric.Image.fromURL(url, function (mask) {
+  new fabric.Image.fromURL(url, function (mask) {
     mask.set('opacity', alpha);
     maskImage = mask;
     if (requiresResize(canvasWidth, mask.width)) {
@@ -250,11 +223,13 @@ function copyUrl() {
 }
 
 function checkRIS() {
+  //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
-  window.open("http://www.google.com/searchbyimage?image_url=" + url);
-  window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&pageurl=http%3A%2F%2Fwww.squobble.com&imgurl=" + url);
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
+  window.open("http://www.google.com/searchbyimage?image_url=" + url);
   window.open("http://www.tineye.com/search/?url=" + url);
+  window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
+  
 }
 
 function updateSlider() {
@@ -262,6 +237,15 @@ function updateSlider() {
   var slider = document.getElementById("alpha");
   text.innerText = slider.value;
   maskImage.set('opacity', slider.value/100);
+  realCanvas.renderAll();
+}
+
+function updateZoomer() {
+  var text = document.getElementById("zoomSliderValue");
+  var slider = document.getElementById("zoom");
+  //text.innerText = slider.value;
+  maskImage.set('scaleX', slider.value/50);
+  maskImage.set('scaleY', slider.value/50);
   realCanvas.renderAll();
 }
 
