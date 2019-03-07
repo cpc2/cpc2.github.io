@@ -2,6 +2,9 @@ var baseImage = null;
 var maskImage = null;
 var canvasHeight, canvasWidth;
 var mask = null;
+var maskoo;
+var imgInstance;
+var triangle;
 var realCanvas = new fabric.Canvas("realCanvas");
 document.getElementById('container').style.display = "none";
 
@@ -98,7 +101,7 @@ function loadSourceImage(baseUrl, externalImage) {
         scaleX: realCanvas.width / img.width,
         scaleY: realCanvas.height / img.height
       });
-      updatePreview();
+      //updatePreview();
     }, null, "Anonymous");
   } else {
     sourceImageUrl = baseUrl;
@@ -110,7 +113,7 @@ function loadSourceImage(baseUrl, externalImage) {
         scaleX: realCanvas.width / img.width,
         scaleY: realCanvas.height / img.height
       });
-      updatePreview();
+      //updatePreview();
     });
   }
   document.getElementById('uploader').style.display = "none";
@@ -136,7 +139,33 @@ function loadMask(selectedMask) {
     realCanvas.remove(maskImage);
   }
 
-  fabric.Image.fromURL(url, function (mask) {
+  /*triangle = new fabric.Triangle({
+    width: 100,
+    height: 100,
+    left: 100,
+    top: 100,
+    //selectable: false,
+    strokeWidth: 3,
+    fill: 'grey',
+    opacity: 1,
+    stroke: 'grey',
+    originX: 'center',
+    originY: 'center'
+  });
+  triangle.width = 200;
+  realCanvas.add(triangle);
+  realCanvas.requestRenderAll();*/
+
+  /*var imgElement = document.getElementById('weave');
+  imgInstance = new fabric.Image(imgElement, {
+    left: 100,
+    top: 100,
+    angle: 30,
+    opacity: 0.85
+  });
+  realCanvas.add(imgInstance);*/
+
+  maskoo = new fabric.Image.fromURL(url, function (mask) {
     mask.set('opacity', alpha);
     maskImage = mask;
     if (requiresResize(canvasWidth, mask.width)) {
@@ -159,7 +188,7 @@ function loadMask(selectedMask) {
     maskImage.set('top', realCanvas.height / 2);
     maskImage.set('left', realCanvas.width / 2);
     realCanvas.add(maskImage);
-    updatePreview();
+    //updatePreview();
   });
 
   //it would be better to use a class and hide them in one line
@@ -173,7 +202,7 @@ function loadMask(selectedMask) {
   document.getElementById('roundTitle').style.display = "none";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
-  updatePreview();
+  //updatePreview();
 }
 
 function upload() {
@@ -232,6 +261,8 @@ function updateSlider() {
   var text = document.getElementById("sliderValue");
   var slider = document.getElementById("alpha");
   text.innerText = slider.value;
+  maskImage.set('opacity', slider.value/100);
+  realCanvas.renderAll();
 }
 
 function getRoundNumber() {
@@ -250,10 +281,10 @@ function getRoundNumber() {
 function postReddit(i) {
   var number = sessionStorage.getItem('round');
   var round = "[Round " + number + "] ";
-  if (i == 2){
-  var imageLink = document.getElementById("uploadedUrl").value;
-  var roundTitle = document.getElementById("roundTitle").value;
-  } else{
+  if (i == 2) {
+    var imageLink = document.getElementById("uploadedUrl").value;
+    var roundTitle = document.getElementById("roundTitle").value;
+  } else {
     var imageLink = document.getElementById("displayedImage").src;
     var roundTitle = document.getElementById("displayedTitle").value;
   }
@@ -278,7 +309,7 @@ function saveImage() {
   }
 }
 
-var i=0;
+var i = 0;
 //What a mess...
 function displaySavedRounds(direction) {
   if (localStorage.getItem('images') == null || localStorage.getItem('titles') == null) {
@@ -294,7 +325,7 @@ function displaySavedRounds(direction) {
       getRoundNumber();
     }
 
-    document.getElementById("savedRounds").style.display="block";
+    document.getElementById("savedRounds").style.display = "block";
     var image = document.getElementById("displayedImage");
     var images = localStorage.getItem('images');
     var imagesArray = images.split(";");
@@ -305,19 +336,19 @@ function displaySavedRounds(direction) {
     var titlesArray = titles.split(";");
     title.value = titlesArray[i];
 
-    if(i<=0){
+    if (i <= 0) {
       var left = document.getElementById("left");
       //left.style.display="none";
-      left.style.visibility="hidden";
-      document.getElementById("right").style.visibility="visible";
-    } else if(i>imagesArray.length-2){
+      left.style.visibility = "hidden";
+      document.getElementById("right").style.visibility = "visible";
+    } else if (i > imagesArray.length - 2) {
       var right = document.getElementById("right");
       //right.style.display="none";
-      right.style.visibility="hidden";
-      document.getElementById("left").style.visibility="visible";
-    } else{
-      document.getElementById("left").style.visibility="visible";
-      document.getElementById("right").style.visibility="visible";
+      right.style.visibility = "hidden";
+      document.getElementById("left").style.visibility = "visible";
+    } else {
+      document.getElementById("left").style.visibility = "visible";
+      document.getElementById("right").style.visibility = "visible";
     }
 
   }
