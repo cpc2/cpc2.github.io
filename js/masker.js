@@ -86,8 +86,7 @@ function uploadImage(e) {
 }
 
 function loadSourceImage(baseUrl, externalImage) {
-  document.getElementById('savedRounds').style.display = "none";
-  document.getElementById('displayRounds').style.display = "none";
+
   var resizeFactor = Math.random() * 0.1 + 0.9;
   if (externalImage == true) {
     sourceImageUrl = addProxyToUrl(baseUrl);
@@ -110,6 +109,17 @@ function loadSourceImage(baseUrl, externalImage) {
       canvasHeight = img.height * resizeFactor;
       canvasWidth = img.width * resizeFactor;
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
+
+      if (img.height>img.width){
+        //canvas.setZoom(0.5);
+        canvas.setWidth(canvasWidth * 800/img.height);
+        canvas.setHeight(canvasHeight * 800/img.height); 
+      } else{
+        //canvas.setZoom(0.5);
+        canvas.setWidth(canvas.width * 800/img.width);
+        canvas.setHeight(canvas.height * 800/img.width);
+      }
+
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
@@ -120,6 +130,8 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('uploader').style.display = "none";
   document.getElementById('mobilePaste').style.display = "none";
   document.getElementById('container').style.display = "grid";
+  document.getElementById('savedRounds').style.display = "none";
+  document.getElementById('displayRounds').style.display = "none";
 }
 
 function loadMask(selectedMask) {
@@ -157,8 +169,8 @@ function loadMask(selectedMask) {
       //maskImage.set('scaleY', 0.5);
       slider.value = 30;
     }
-    maskImage.set('scaleX', 0.25*Math.pow(Math.E,0.0277*slider.value));
-    maskImage.set('scaleY', 0.25*Math.pow(Math.E,0.0277*slider.value));
+    maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
+    maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
 
     maskImage.rotate(Math.random() * 4 - 2);
     maskImage.set({ transformMatrix: [1, Math.random() / 5, Math.random() / 5, 1, 0, 0] });
@@ -185,6 +197,9 @@ function loadMask(selectedMask) {
 }
 
 function upload() {
+  //canvas.setZoom(4);
+  //canvas.setWidth(canvas.width * 4);
+  //canvas.setHeight(canvas.height * 4);
   var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
   $.ajax({
@@ -235,14 +250,14 @@ function checkRIS() {
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
   window.open("http://www.tineye.com/search/?url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
-  
+
 }
 
 function updateOpacity() {
   var text = document.getElementById("sliderValue");
   var slider = document.getElementById("alpha");
   text.innerText = slider.value;
-  maskImage.set('opacity', slider.value/100);
+  maskImage.set('opacity', slider.value / 100);
   canvas.renderAll();
 }
 
@@ -250,8 +265,8 @@ function updateZoomer() {
   var text = document.getElementById("zoomSliderValue");
   var slider = document.getElementById("zoom");
   //text.innerText = slider.value;
-  maskImage.set('scaleX', 0.25*Math.pow(Math.E,0.0277*slider.value));
-  maskImage.set('scaleY', 0.25*Math.pow(Math.E,0.0277*slider.value));
+  maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
+  maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
   canvas.renderAll();
 }
 
@@ -298,8 +313,8 @@ function saveImage() {
     localStorage.setItem('titles', titles);
   }
   var button = document.getElementById("Save");
-  button.value="Saved!";
-  button.style.backgroundColor= "rgb(184, 248, 159)";
+  button.innerText = "Saved!";
+  button.style.backgroundColor = "rgb(184, 248, 159)";
 }
 
 var i = 0;
