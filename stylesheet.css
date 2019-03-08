@@ -222,7 +222,7 @@ img:hover{
 }
 
 #roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder{
-	color: white;
+	color: rgb(230, 230, 230);
 }
 
 #mobilePaste{

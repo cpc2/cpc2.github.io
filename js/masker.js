@@ -415,6 +415,11 @@ function displaySavedRounds(direction) {
       document.getElementById("right").style.visibility = "visible";
     }
 
+    if (imagesArray.length == 1){
+      document.getElementById("left").style.visibility = "hidden";
+      document.getElementById("right").style.visibility = "hidden";
+    }
+
   }
 
 }
