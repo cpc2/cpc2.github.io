@@ -280,8 +280,8 @@ function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
-  window.open("http://www.tineye.com/search/?url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
+  window.open("http://www.tineye.com/search/?url=" + url);
 
 }
 
@@ -378,6 +378,7 @@ function displaySavedRounds(direction) {
     } else if (direction == 0) {
       if (document.getElementById("savedRounds").style.display == "block"){
         document.getElementById("savedRounds").style.display = "none";
+        return true;
       }
       getRoundNumber();
     }
@@ -417,26 +418,35 @@ function displaySavedRounds(direction) {
 
 }
 
-//Fix this
+
 function deleteImage(){
   var images = localStorage.getItem('images');
   var imagesArray = images.split(";");
   
   var titles = localStorage.getItem('titles')
   var titlesArray = titles.split(";");
+
+  var answers = localStorage.getItem('answers');
+  var answersArray = answers.split(";");
+
   imagesArray.shift(i);
   titlesArray.shift(i);
+  answersArray.shift(i);
 
   listImages = imagesArray.join(";");
   listTitles = titlesArray.join(";");
+  listAnswers = answersArray.join(";");
 
   localStorage.setItem('images', listImages);
   localStorage.setItem('titles', listTitles);
+  localStorage.setItem('answers', listAnswers);
 
   if (imagesArray.length == 0){
-    document.getElementById("savedRounds").style.display = "none";
+    //document.getElementById("savedRounds").style.display = "none";
+    displaySavedRounds(0);
   } else{
-    displaySavedRounds(2);
+    i=0;
+    displaySavedRounds(3);
   }
 
 }

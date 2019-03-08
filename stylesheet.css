@@ -162,9 +162,14 @@ img:hover{
 	font-size: 1.2em;
 }
 
-#displayedTitle, #displayedAnswer, #PostReddit2, #delete{
+#displayedTitle, #displayedAnswer{
 	position: relative;
-	/*left: 45%;*/
+	margin: 5px;
+	width: 300px;
+}
+
+#PostReddit2, #delete{
+	position: relative;
 	margin: 5px;
 	width: 200px;
 }
