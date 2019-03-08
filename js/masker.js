@@ -99,6 +99,8 @@ function loadSourceImage(baseUrl, externalImage) {
       sessionStorage.setItem('height', img.height);
       sessionStorage.setItem('width', img.width);
 
+      canvas.setHeight(canvasHeight).setWidth(canvasWidth);
+
       if (img.height>img.width){
         canvas.setWidth(canvasWidth * 800/img.height);
         canvas.setHeight(canvasHeight * 800/img.height); 
@@ -107,7 +109,7 @@ function loadSourceImage(baseUrl, externalImage) {
         canvas.setHeight(canvas.height * 800/img.width);
       }
 
-      canvas.setHeight(canvasHeight).setWidth(canvasWidth);
+      
       canvas.setBackgroundImage(new fabric.Image(img), canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
@@ -119,6 +121,9 @@ function loadSourceImage(baseUrl, externalImage) {
     fabric.Image.fromURL(sourceImageUrl, function (img) {
       canvasHeight = img.height * resizeFactor;
       canvasWidth = img.width * resizeFactor;
+      sessionStorage.setItem('height', img.height);
+      sessionStorage.setItem('width', img.width);
+
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
@@ -206,7 +211,7 @@ function loadMask(selectedMask) {
 }
 
 function upload() {
-  /*var originalHeight = sessionStorage.getItem('height');
+  var originalHeight = sessionStorage.getItem('height');
   var originalWidth = sessionStorage.getItem('width');
   if (originalHeight > originalWidth){
     canvas.setZoom(originalHeight/800);
@@ -216,7 +221,7 @@ function upload() {
     canvas.setZoom(originalWidth/800);
     canvas.setWidth(canvas.width * originalWidth/800);
     canvas.setHeight(canvas.height * originalWidth/800);
-  }*/
+  }
 
   var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
