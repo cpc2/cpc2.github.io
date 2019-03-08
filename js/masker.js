@@ -388,10 +388,15 @@ function displaySavedRounds(direction) {
     var imagesArray = images.split(";");
     image.src = imagesArray[i];
 
-    var title = document.getElementById("displayedTitle")
+    var title = document.getElementById("displayedTitle");
     var titles = localStorage.getItem('titles')
     var titlesArray = titles.split(";");
     title.value = titlesArray[i];
+
+    var answer = document.getElementById("displayedAnswer");
+    var answers = localStorage.getItem('answers')
+    var answersArray = answers.split(";");
+    answer.value = answersArray[i];
 
     if (i <= 0) {
       var left = document.getElementById("left");
@@ -435,3 +440,7 @@ function deleteImage(){
   }
 
 }
+
+localStorage.setItem('images', "https://i.imgur.com/RugI8Ob.png;https://i.imgur.com/wbTADd9.jpg;https://i.imgur.com/hmBDM6V.png;https://i.imgur.com/4wfzOqr.png");
+localStorage.setItem('titles', "Where is this?; Who is this?; Why did this person do something crazy, idk, like using some kind of beverage to turn themselves into a blob??;Why? Just why?")
+localStorage.setItem('answers', "this is where; Person mcPerson;IDK ur weird;Uhhh you're getting weird m'lady")

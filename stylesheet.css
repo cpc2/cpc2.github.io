@@ -116,7 +116,7 @@ img:hover{
 
 #savedRounds{
 	display: none;
-	/*text-align: center;*/
+	text-align: center;
 }
 
 #left, #right{
@@ -137,14 +137,14 @@ img:hover{
 }
 
 #right{
-	/*float: right;*/
+	float: right;
 	margin-right: 20vw;
 	margin-left: 0;
 }
 
 #displayedImage{
 	display: inline-block;
-	width: 30vw;
+	width: 40vw;
 	margin: 0 auto;
 	
 }
@@ -164,7 +164,7 @@ img:hover{
 
 #displayedTitle, #displayedAnswer, #PostReddit2, #delete{
 	position: relative;
-	left: 45%;
+	/*left: 45%;*/
 	margin: 5px;
 	width: 200px;
 }
