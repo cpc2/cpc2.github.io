@@ -53,7 +53,17 @@ img:hover{
     
 }
 
-#alpha, #zoom {
+#colorSelect{
+	background-color: transparent;
+	padding: 0;
+	border: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	margin-left: 10px;
+}
+
+#alpha, #zoom, #brushSize {
 	display:inline-block;
 	line-height: 0;
 
@@ -64,16 +74,16 @@ img:hover{
 	height: 10px;
 	border: none;
 	opacity: 0.5;
-	width: 50%;
+	width: 70%;
 	padding: 10px;
 	transition: 0.5s;
 }
 
-#alpha:hover, #zoom:hover{
+#alpha:hover, #zoom:hover, #brushSize:hover{
 	background-color:rgb(236, 212, 192);
 }
 
-#alpha::-webkit-slider-thumb, #zoom::-webkit-slider-thumb{
+#alpha::-webkit-slider-thumb, #zoom::-webkit-slider-thumb, #brushSize::-webkit-slider-thumb{
 	-webkit-appearance: none;
 	appearance: none;
 	background: rgb(224, 146, 82);
@@ -106,12 +116,13 @@ img:hover{
 
 #savedRounds{
 	display: none;
+	text-align: center;
 }
 
 #left, #right{
 	display: inline-block;
 	border: none;
-	background-color: rgb(255, 167, 51);
+	background-color: rgb(255, 197, 88);
 	padding: 6px;
 	font-size: 1.8em;
 	width: 45px;
@@ -122,18 +133,20 @@ img:hover{
 
 #left{
 	float: left;
-	margin-left: 30vw;
+	margin-left: 20vw;
 }
 
 #right{
 	float: right;
-	margin-right: 30vw;
+	margin-right: 20vw;
+	margin-left: 0;
 }
 
 #displayedImage{
 	display: inline-block;
-	width: 30vw;
-	margin: 10px;
+	width: 40vw;
+	margin: 0 auto;
+	
 }
 
 #displayRounds{
@@ -149,9 +162,14 @@ img:hover{
 	font-size: 1.2em;
 }
 
-#displayedTitle, #PostReddit2{
+#displayedTitle, #displayedAnswer{
 	position: relative;
-	left: 45%;
+	margin: 5px;
+	width: 300px;
+}
+
+#PostReddit2, #delete{
+	position: relative;
 	margin: 5px;
 	width: 200px;
 }
@@ -173,11 +191,7 @@ img:hover{
 }
 
 
-#hidden {
-	display: none;
-}
-
-#buttons button, #buttons :first-child, #PostReddit2{
+#buttons button, #buttons :first-child, #PostReddit2, #delete{
 	background-color: rgb(236, 140, 116);
 	color: white;
 	border: none;
@@ -192,14 +206,14 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle, #uploadedUrl, #displayedTitle{
+#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
 	padding: 10px;
 }
 
-#roundTitle, #uploadedUrl{
+#roundTitle, #roundAnswer, #uploadedUrl{
 	display: none;
 }
 
@@ -207,8 +221,8 @@ img:hover{
 	margin-top: 10px;
 }
 
-#roundTitle::placeholder{
-	color: white;
+#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder{
+	color: rgb(230, 230, 230);
 }
 
 #mobilePaste{
@@ -226,6 +240,10 @@ img:hover{
 	padding: 10px;
 	margin-bottom: 10px;
 	font-size: 150%
+}
+
+#previewImage{
+	display: none;
 }
 
 /*#mobilePaste button{
