@@ -302,6 +302,16 @@ function updateZoomer() {
   canvas.renderAll();
 }
 
+function brushSize(){
+  var brushSize = document.getElementById("brushSize");
+  canvas.freeDrawingBrush.width = brushSize.value;
+}
+
+function colorSelect(){
+  var color = document.getElementById("colorSelect");
+  canvas.freeDrawingBrush.color = color.value;
+}
+
 function getRoundNumber() {
   var request = new XMLHttpRequest();
   request.open("GET", "https://api.picturegame.co/current", true);
@@ -330,7 +340,7 @@ function postReddit(i) {
 }
 
 function saveImage() {
-  //Future: save answer too
+  //Maybe I should use objects instead of saving it as three items in localstorage
   var imageURL = document.getElementById("uploadedUrl").value;
   var roundTitle = document.getElementById("roundTitle").value;
   var roundAnswer = document.getElementById("roundAnswer").value;
@@ -402,6 +412,7 @@ function displaySavedRounds(direction) {
 
 }
 
+//Fix this
 function deleteImage(){
   var images = localStorage.getItem('images');
   var imagesArray = images.split(";");
