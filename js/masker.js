@@ -1,6 +1,4 @@
-var baseImage = null;
 var maskImage = null;
-var isNight;
 var canvasHeight, canvasWidth;
 var imgHeight, imgWidth;
 var number;
@@ -104,7 +102,6 @@ function loadSourceImage(baseUrl, externalImage) {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
       });
-      //updatePreview();
     }, null, "Anonymous");
   } else {
     sourceImageUrl = baseUrl;
@@ -127,7 +124,6 @@ function loadSourceImage(baseUrl, externalImage) {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
       });
-      //updatePreview();
     });
   }
   document.getElementById('uploader').style.display = "none";
@@ -160,11 +156,9 @@ function loadMask(selectedMask) {
     maskImage = mask;
     var slider = document.getElementById("zoom");
     if (requiresResize(canvasWidth, mask.width)) {
-      //maskImage.set('scaleX', 1.3 * canvas.width / mask.width);
       slider.value = 70;
     }
     if (requiresResize(canvasHeight, mask.height)) {
-      //maskImage.set('scaleY', 1.3 * canvas.height / mask.height);
       slider.value = 70;
     }
     if (requiresMinimize(canvasWidth, mask.width) || requiresMinimize(canvasHeight, mask.height)) {
@@ -182,7 +176,6 @@ function loadMask(selectedMask) {
     maskImage.set('top', canvas.height / 2);
     maskImage.set('left', canvas.width / 2);
     canvas.add(maskImage);
-    //updatePreview();
   });
 
   //it would be better to use a class and hide them in one line
@@ -197,7 +190,6 @@ function loadMask(selectedMask) {
   document.getElementById('roundAnswer').style.display = "none";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
-  //updatePreview();
 }
 
 function upload() {
@@ -289,7 +281,6 @@ function updateOpacity() {
 function updateZoomer() {
   var text = document.getElementById("zoomSliderValue");
   var slider = document.getElementById("zoom");
-  //text.innerText = slider.value;
   maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
   maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
   canvas.renderAll();
