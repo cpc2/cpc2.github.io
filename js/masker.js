@@ -96,6 +96,17 @@ function loadSourceImage(baseUrl, externalImage) {
       }
       canvasHeight = img.height * resizeFactor;
       canvasWidth = img.width * resizeFactor;
+      sessionStorage.setItem('height', img.height);
+      sessionStorage.setItem('width', img.width);
+
+      if (img.height>img.width){
+        canvas.setWidth(canvasWidth * 800/img.height);
+        canvas.setHeight(canvasHeight * 800/img.height); 
+      } else{
+        canvas.setWidth(canvas.width * 800/img.width);
+        canvas.setHeight(canvas.height * 800/img.width);
+      }
+
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
       canvas.setBackgroundImage(new fabric.Image(img), canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
@@ -111,11 +122,9 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
-        //canvas.setZoom(0.5);
         canvas.setWidth(canvasWidth * 800/img.height);
         canvas.setHeight(canvasHeight * 800/img.height); 
       } else{
-        //canvas.setZoom(0.5);
         canvas.setWidth(canvas.width * 800/img.width);
         canvas.setHeight(canvas.height * 800/img.width);
       }
@@ -197,9 +206,18 @@ function loadMask(selectedMask) {
 }
 
 function upload() {
-  //canvas.setZoom(4);
-  //canvas.setWidth(canvas.width * 4);
-  //canvas.setHeight(canvas.height * 4);
+  var originalHeight = sessionStorage.getItem('height');
+  var originalWidth = sessionStorage.getItem('width');
+  if (originalHeight > originalWidth){
+    canvas.setZoom(originalHeight/800);
+    canvas.setWidth(canvas.width * originalHeight/800);
+    canvas.setHeight(canvas.height * originalHeight/800);
+  } else{
+    canvas.setZoom(originalWidth/800);
+    canvas.setWidth(canvas.width * originalWidth/800);
+    canvas.setHeight(canvas.height * originalWidth/800);
+  }
+
   var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
   $.ajax({
