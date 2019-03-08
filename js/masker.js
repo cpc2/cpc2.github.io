@@ -368,7 +368,7 @@ function saveImage() {
 var i = 0;
 //What a mess...
 function displaySavedRounds(direction) {
-  if (localStorage.getItem('images') == null || localStorage.getItem('titles') == null) {
+  if (localStorage.getItem('images') == null || localStorage.getItem('images') == "") {
     alert("There are no saved images!");
   }
   else {
