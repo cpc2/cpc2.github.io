@@ -102,11 +102,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
+        canvas.setWidth(canvasWidth * Math.round(800/img.height * 100) / 100);
+        canvas.setHeight(canvasHeight * Math.round(800/img.height * 100) / 100); 
       } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+        canvas.setWidth(canvas.width * Math.round(800/img.width * 100) / 100);
+        canvas.setHeight(canvas.height * Math.round(800/img.width * 100) / 100);
       }
 
       
@@ -127,11 +127,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
+        canvas.setWidth(canvasWidth * Math.round(800/img.height * 100) / 100);
+        canvas.setHeight(canvasHeight * Math.round(800/img.height * 100) / 100); 
       } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+        canvas.setWidth(canvas.width * Math.round(800/img.width * 100) / 100);
+        canvas.setHeight(canvas.height * Math.round(800/img.width * 100) / 100);
       }
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
@@ -214,13 +214,13 @@ function upload() {
   var originalHeight = sessionStorage.getItem('height');
   var originalWidth = sessionStorage.getItem('width');
   if (originalHeight > originalWidth){
-    canvas.setZoom(originalHeight/800);
-    canvas.setWidth(canvas.width * originalHeight/800);
-    canvas.setHeight(canvas.height * originalHeight/800);
+    canvas.setZoom(Math.round(originalHeight/800 * 100) / 100);
+    canvas.setWidth(canvas.width * (Math.round(originalHeight/800 * 100) / 100));
+    canvas.setHeight(canvas.height * (Math.round(originalHeight/800 * 100) / 100));
   } else{
-    canvas.setZoom(originalWidth/800);
-    canvas.setWidth(canvas.width * originalWidth/800);
-    canvas.setHeight(canvas.height * originalWidth/800);
+    canvas.setZoom(Math.round(originalWidth/800 * 100) / 100);
+    canvas.setWidth(canvas.width * (Math.round(originalWidth/800 * 100) / 100));
+    canvas.setHeight(canvas.height * (Math.round(originalWidth/800 * 100) / 100));
   }
 
   var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
