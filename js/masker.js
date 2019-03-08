@@ -1,9 +1,9 @@
 var baseImage = null;
 var maskImage = null;
 var canvasHeight, canvasWidth;
+var imgHeight, imgWidth;
 var mask = null;
 var imgInstance;
-var triangle;
 var canvas = new fabric.Canvas(document.getElementById('canvas'), {
   isDrawingMode: true
 });
@@ -93,6 +93,8 @@ function loadSourceImage(baseUrl, externalImage) {
       canvasWidth = img.width * resizeFactor;
       sessionStorage.setItem('height', img.height);
       sessionStorage.setItem('width', img.width);
+      imgHeight = img.height;
+      imgWidth = img.width;
 
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
@@ -116,9 +118,10 @@ function loadSourceImage(baseUrl, externalImage) {
     fabric.Image.fromURL(sourceImageUrl, function (img) {
       canvasHeight = img.height * resizeFactor;
       canvasWidth = img.width * resizeFactor;
-      sessionStorage.setItem('height', img.height);
-      sessionStorage.setItem('width', img.width);
-
+      //sessionStorage.setItem('height', img.height);
+      //sessionStorage.setItem('width', img.width);
+      imgHeight = img.height;
+      imgWidth = img.width;
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
@@ -211,16 +214,16 @@ function upload() {
   //canvas.isDrawingMode = false;
   document.getElementById('previewImage').style.display = "block";
   updatePreview();
-  var originalHeight = sessionStorage.getItem('height');
-  var originalWidth = sessionStorage.getItem('width');
-  if (originalHeight > originalWidth) {
-    canvas.setZoom(originalHeight / 800);
-    canvas.setWidth(canvas.width * originalHeight / 800);
-    canvas.setHeight(canvas.height * originalHeight / 800);
+  //var originalHeight = sessionStorage.getItem('height');
+  //var originalWidth = sessionStorage.getItem('width');
+  if (imgHeight > imgWidth) {
+    canvas.setZoom(imgHeight / 800);
+    canvas.setWidth(canvas.width * imgHeight / 800);
+    canvas.setHeight(canvas.height * imgHeight / 800);
   } else {
-    canvas.setZoom(originalWidth / 800);
-    canvas.setWidth(canvas.width * originalWidth / 800);
-    canvas.setHeight(canvas.height * originalWidth / 800);
+    canvas.setZoom(imgWidth / 800);
+    canvas.setWidth(canvas.width * imgWidth / 800);
+    canvas.setHeight(canvas.height * imgWidth / 800);
   }
 
   setTimeout(imgurUpload, 500); 
