@@ -285,3 +285,15 @@ body.night{
 #uploadlabel.night:hover{
 	background-color: rgb(71, 77, 146);
 }
+
+#buttons.night button, #buttons :first-child, #PostReddit2, #delete{
+	background-color: rgb(34, 27, 61);
+}
+
+#buttons.night button:hover, #buttons :first-child:hover{
+	background-color: rgb(22, 13, 39);
+}
+
+#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer{
+	background-color: rgb(29, 23, 56);
+}
