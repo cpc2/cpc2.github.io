@@ -13,7 +13,7 @@
 <body>
   <div id="uploader">
     <label id="uploadlabel" for="imageUpload" style="cursor:pointer;">
-      Use paste or click here to upload an image.
+      Paste image or click here to upload an image.
     </label>
     <input type="file" id="imageUpload" style="display: none;" onchange="uploadImage(event)">
   </div>
@@ -26,8 +26,10 @@
     <img id="displayedImage">
     <button id="right" onclick="displaySavedRounds(2)"> ▶ </button>
     <br>
-    <input id="displayedTitle" type="text"> <br>
-    <button id="PostReddit2" onclick="postReddit(1)">Submit to /r/PictureGame</button>
+    <input id="displayedTitle" placeholder="Round title" type="text"> <br>
+    <input id="displayedAnswer" placeholder="Round answer" type="text"> <br>
+    <button id="PostReddit2" onclick="postReddit(1)">Submit to /r/PictureGame</button> <br>
+    <button id="delete" onclick="deleteImage()">Delete round</button>
   </div>
   <div id="container">
     <div id="masker">
@@ -67,6 +69,7 @@
         <button type="button" id="copyToClipboard" onclick="copyUrl()" style="display: none;">Copy</button>
         <button type="button" id="checkForRIS" onclick="checkRIS()" style="display: none;">Check RIS</button>
         <input type="text" id="roundTitle" placeholder="Round Title">
+        <input type="text" id="roundAnswer" placeholder="Round Answer">
         <button type="button" id="PostReddit" onclick="postReddit(2)" style="display: none;">Submit to
           /r/PictureGame</button>
         <button type="button" id="Save" onclick="saveImage()" style="display: none;">Save round</button>

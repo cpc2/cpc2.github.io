@@ -10,8 +10,8 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
 document.getElementById('container').style.display = "none";
 
 
-var brush = new fabric.PencilBrush(canvas);
-brush.width = 500;
+canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+canvas.freeDrawingBrush.width = 10;
 
 $("html").on("paste", function (event) {
   if (event.originalEvent.clipboardData) {
@@ -200,6 +200,7 @@ function loadMask(selectedMask) {
   document.getElementById('checkForRIS').style.display = "none";
   document.getElementById('PostReddit').style.display = "none";
   document.getElementById('roundTitle').style.display = "none";
+  document.getElementById('roundAnswer').style.display = "none";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
   //updatePreview();
@@ -224,7 +225,7 @@ function upload() {
 
   setTimeout(imgurUpload, 500); 
   /*I had to set a timeout, otherwise the canvas size change isn't fast enough and the next 
-  line doesn't know what to upload*/
+  line doesn't know what to upload.. I'll leave it at 500ms just in case.*/
 
   function imgurUpload() {
 
@@ -254,6 +255,7 @@ function upload() {
           document.getElementById('checkForRIS').style.display = "inline-block";
           document.getElementById('PostReddit').style.display = "inline-block";
           document.getElementById('roundTitle').style.display = "inline-block";
+          document.getElementById('roundAnswer').style.display = "inline-block";
           document.getElementById('Save').style.display = "inline-block";
         } else {
           alert("Failed to upload.");
@@ -331,20 +333,25 @@ function saveImage() {
   //Future: save answer too
   var imageURL = document.getElementById("uploadedUrl").value;
   var roundTitle = document.getElementById("roundTitle").value;
+  var roundAnswer = document.getElementById("roundAnswer").value;
+
   if (localStorage.getItem('images') == null) {
     localStorage.setItem('images', imageURL);
-    localStorage.setItem('titles', roundTitle)
-  } else {
+    localStorage.setItem('titles', roundTitle);
+    localStorage.setItem('answers', roundAnswer);
+  } else { 
     var images = localStorage.getItem('images');
     var titles = localStorage.getItem('titles');
+    var answers = localStorage.getItem('answers');
     images += ";" + imageURL;
     titles += ";" + titles;
     localStorage.setItem('images', images);
     localStorage.setItem('titles', titles);
+    localStorage.setItem('answers', answers);
   }
   var button = document.getElementById("Save");
   button.innerText = "Saved!";
-  button.style.backgroundColor = "rgb(184, 248, 159)";
+  button.style.backgroundColor = "rgb(175, 211, 161)";
 }
 
 var i = 0;
@@ -359,7 +366,9 @@ function displaySavedRounds(direction) {
     } else if (direction == 2) {
       i++;
     } else if (direction == 0) {
-      i = 0;
+      if (document.getElementById("savedRounds").style.display == "block"){
+        document.getElementById("savedRounds").style.display = "none";
+      }
       getRoundNumber();
     }
 
@@ -389,6 +398,29 @@ function displaySavedRounds(direction) {
       document.getElementById("right").style.visibility = "visible";
     }
 
+  }
+
+}
+
+function deleteImage(){
+  var images = localStorage.getItem('images');
+  var imagesArray = images.split(";");
+  
+  var titles = localStorage.getItem('titles')
+  var titlesArray = titles.split(";");
+  imagesArray.shift(i);
+  titlesArray.shift(i);
+
+  listImages = imagesArray.join(";");
+  listTitles = titlesArray.join(";");
+
+  localStorage.setItem('images', listImages);
+  localStorage.setItem('titles', listTitles);
+
+  if (imagesArray.length == 0){
+    document.getElementById("savedRounds").style.display = "none";
+  } else{
+    displaySavedRounds(2);
   }
 
 }

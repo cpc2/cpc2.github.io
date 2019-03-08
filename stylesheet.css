@@ -106,12 +106,13 @@ img:hover{
 
 #savedRounds{
 	display: none;
+	/*text-align: center;*/
 }
 
 #left, #right{
 	display: inline-block;
 	border: none;
-	background-color: rgb(255, 167, 51);
+	background-color: rgb(255, 197, 88);
 	padding: 6px;
 	font-size: 1.8em;
 	width: 45px;
@@ -122,18 +123,20 @@ img:hover{
 
 #left{
 	float: left;
-	margin-left: 30vw;
+	margin-left: 20vw;
 }
 
 #right{
-	float: right;
-	margin-right: 30vw;
+	/*float: right;*/
+	margin-right: 20vw;
+	margin-left: 0;
 }
 
 #displayedImage{
 	display: inline-block;
 	width: 30vw;
-	margin: 10px;
+	margin: 0 auto;
+	
 }
 
 #displayRounds{
@@ -149,7 +152,7 @@ img:hover{
 	font-size: 1.2em;
 }
 
-#displayedTitle, #PostReddit2{
+#displayedTitle, #displayedAnswer, #PostReddit2, #delete{
 	position: relative;
 	left: 45%;
 	margin: 5px;
@@ -173,7 +176,7 @@ img:hover{
 }
 
 
-#buttons button, #buttons :first-child, #PostReddit2{
+#buttons button, #buttons :first-child, #PostReddit2, #delete{
 	background-color: rgb(236, 140, 116);
 	color: white;
 	border: none;
@@ -188,14 +191,14 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle, #uploadedUrl, #displayedTitle{
+#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
 	padding: 10px;
 }
 
-#roundTitle, #uploadedUrl{
+#roundTitle, #roundAnswer, #uploadedUrl{
 	display: none;
 }
 
@@ -203,7 +206,7 @@ img:hover{
 	margin-top: 10px;
 }
 
-#roundTitle::placeholder{
+#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder{
 	color: white;
 }
 
