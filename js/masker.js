@@ -354,8 +354,8 @@ function saveImage() {
     var titles = localStorage.getItem('titles');
     var answers = localStorage.getItem('answers');
     images += ";" + imageURL;
-    titles += ";" + title;
-    answers += ";" + answer;
+    titles += ";" + roundTitle;
+    answers += ";" + roundAnswer;
     localStorage.setItem('images', images);
     localStorage.setItem('titles', titles);
     localStorage.setItem('answers', answers);
