@@ -290,13 +290,17 @@ body.night{
 }
 
 #buttons.night *, #buttons.night :first-child{
-	background-color: rgb(34, 27, 61);
+	background-color: rgb(53, 44, 95);
 }
 
 #buttons.night button:hover, #buttons.night :first-child:hover{
-	background-color: rgb(22, 13, 39);
+	background-color: rgb(53, 44, 95);
 }
 
-#displayedTitle.night, #displayedAnswer.night, #PostReddit2.night, #delete.night, #right.night, #left.night{
-	background-color: rgb(29, 23, 56);
+#displayedTitle.night, #displayedAnswer.night, #buttons.night input{
+	background-color: rgb(74, 59, 136);
+}
+
+#PostReddit2.night, #delete.night, #right.night, #left.night{
+	background-color: rgb(37, 30, 70);
 }
