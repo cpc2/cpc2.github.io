@@ -8,4 +8,5 @@ This is a fork of imagemasker.github.io with updated CSS, mask rotation and expe
 * Fix issues on mobile browsers
 * More editing tools? (as long as it doesn't get too heavy)
 * "My masks" section with custom uploaded masks?
-* Clean everything
+* Night mode
+* Clean everything, it has become an unoptimized mess
