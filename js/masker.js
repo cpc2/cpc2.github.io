@@ -10,8 +10,8 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
 document.getElementById('container').style.display = "none";
 
 
-var brush = new fabric.PencilBrush(canvas);
-brush.width = 500;
+canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+canvas.freeDrawingBrush.width = 10;
 
 $("html").on("paste", function (event) {
   if (event.originalEvent.clipboardData) {
@@ -70,11 +70,6 @@ function updatePreview() {
   var image = document.getElementById('imagePreview');
   canvas.renderAll();
   image.src = canvas.toDataURL('image/jpeg', 1.0);
-  if (canvas.width > canvas.height) {
-    image.width = 700;
-  } else {
-    image.height = 700;
-  }
 }
 
 function uploadImage(e) {
@@ -102,14 +97,14 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
+        canvas.setWidth(canvasWidth * Math.round(800/img.height * 100) / 100);
+        canvas.setHeight(canvasHeight * Math.round(800/img.height * 100) / 100); 
       } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+        canvas.setWidth(canvas.width * Math.round(800/img.width * 100) / 100);
+        canvas.setHeight(canvas.height * Math.round(800/img.width * 100) / 100);
       }
 
-      
+
       canvas.setBackgroundImage(new fabric.Image(img), canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
@@ -127,11 +122,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
+        canvas.setWidth(canvasWidth * Math.round(800/img.height * 100) / 100);
+        canvas.setHeight(canvasHeight * Math.round(800/img.height * 100) / 100); 
       } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+        canvas.setWidth(canvas.width * Math.round(800/img.width * 100) / 100);
+        canvas.setHeight(canvas.height * Math.round(800/img.width * 100) / 100);
       }
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
@@ -205,59 +200,73 @@ function loadMask(selectedMask) {
   document.getElementById('checkForRIS').style.display = "none";
   document.getElementById('PostReddit').style.display = "none";
   document.getElementById('roundTitle').style.display = "none";
+  document.getElementById('roundAnswer').style.display = "none";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
   //updatePreview();
 }
 
 function upload() {
+  document.getElementById('canvasDiv').style.display = "none";
+  //canvas.isDrawingMode = false;
+  document.getElementById('previewImage').style.display = "block";
+  updatePreview();
   var originalHeight = sessionStorage.getItem('height');
   var originalWidth = sessionStorage.getItem('width');
   if (originalHeight > originalWidth){
-    canvas.setZoom(originalHeight/800);
-    canvas.setWidth(canvas.width * originalHeight/800);
-    canvas.setHeight(canvas.height * originalHeight/800);
+    canvas.setZoom(Math.round(originalHeight/800 * 100) / 100);
+    canvas.setWidth(canvas.width * (Math.round(originalHeight/800 * 100) / 100));
+    canvas.setHeight(canvas.height * (Math.round(originalHeight/800 * 100) / 100));
   } else{
-    canvas.setZoom(originalWidth/800);
-    canvas.setWidth(canvas.width * originalWidth/800);
-    canvas.setHeight(canvas.height * originalWidth/800);
+    canvas.setZoom(Math.round(originalWidth/800 * 100) / 100);
+    canvas.setWidth(canvas.width * (Math.round(originalWidth/800 * 100) / 100));
+    canvas.setHeight(canvas.height * (Math.round(originalWidth/800 * 100) / 100));
   }
 
-  var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
+  setTimeout(imgurUpload, 500); 
+  /*I had to set a timeout, otherwise the canvas size change isn't fast enough and the next 
+  line doesn't know what to upload.. I'll leave it at 500ms just in case.*/
 
-  $.ajax({
-    url: 'https://api.imgur.com/3/image',
-    type: 'post',
-    headers: {
-      Authorization: 'Client-ID 9c586fafe6ec100'
-    },
-    data: {
-      image: img
-    },
-    dataType: 'json',
-    error: function (response) {
-      alert("Error uploading to Imgur. Reason: " + response.responseJSON.data.error);
-      document.getElementById('uploadbutton').value = "Upload to Imgur";
-      document.getElementById('uploadbutton').disabled = false;
-    },
-    success: function (response) {
-      if (response.success) {
-        document.getElementById('uploadedUrl').value = response.data.link;
-        document.getElementById('uploadbutton').style.display = "none";
-        document.getElementById('uploadedUrl').style.display = "inline-block";
-        document.getElementById('copyToClipboard').style.display = "inline-block";
-        document.getElementById('checkForRIS').style.display = "inline-block";
-        document.getElementById('PostReddit').style.display = "inline-block";
-        document.getElementById('roundTitle').style.display = "inline-block";
-        document.getElementById('Save').style.display = "inline-block";
-      } else {
-        alert("Failed to upload.");
+  function imgurUpload() {
+
+    var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
+
+    $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      type: 'post',
+      headers: {
+        Authorization: 'Client-ID 9c586fafe6ec100'
+      },
+      data: {
+        image: img
+      },
+      dataType: 'json',
+      error: function (response) {
+        alert("Error uploading to Imgur. Reason: " + response.responseJSON.data.error);
+        document.getElementById('uploadbutton').value = "Upload to Imgur";
+        document.getElementById('uploadbutton').disabled = false;
+      },
+      success: function (response) {
+        if (response.success) {
+          document.getElementById('uploadedUrl').value = response.data.link;
+          document.getElementById('uploadbutton').style.display = "none";
+          document.getElementById('uploadedUrl').style.display = "inline-block";
+          document.getElementById('copyToClipboard').style.display = "inline-block";
+          document.getElementById('checkForRIS').style.display = "inline-block";
+          document.getElementById('PostReddit').style.display = "inline-block";
+          document.getElementById('roundTitle').style.display = "inline-block";
+          document.getElementById('roundAnswer').style.display = "inline-block";
+          document.getElementById('Save').style.display = "inline-block";
+        } else {
+          alert("Failed to upload.");
+        }
       }
-    }
-  });
-  document.getElementById('uploadbutton').value = "Uploading...";
-  document.getElementById('uploadbutton').disabled = true;
-  getRoundNumber();
+    });
+    document.getElementById('uploadbutton').value = "Uploading...";
+    document.getElementById('uploadbutton').disabled = true;
+    getRoundNumber();
+  }
+
 }
 
 function copyUrl() {
@@ -271,8 +280,8 @@ function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
-  window.open("http://www.tineye.com/search/?url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
+  window.open("http://www.tineye.com/search/?url=" + url);
 
 }
 
@@ -291,6 +300,16 @@ function updateZoomer() {
   maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
   maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
   canvas.renderAll();
+}
+
+function brushSize(){
+  var brushSize = document.getElementById("brushSize");
+  canvas.freeDrawingBrush.width = brushSize.value;
+}
+
+function colorSelect(){
+  var color = document.getElementById("colorSelect");
+  canvas.freeDrawingBrush.color = color.value;
 }
 
 function getRoundNumber() {
@@ -321,29 +340,35 @@ function postReddit(i) {
 }
 
 function saveImage() {
-  //Future: save answer too
+  //Maybe I should use objects instead of saving it as three items in localstorage
   var imageURL = document.getElementById("uploadedUrl").value;
   var roundTitle = document.getElementById("roundTitle").value;
+  var roundAnswer = document.getElementById("roundAnswer").value;
+
   if (localStorage.getItem('images') == null) {
     localStorage.setItem('images', imageURL);
-    localStorage.setItem('titles', roundTitle)
-  } else {
+    localStorage.setItem('titles', roundTitle);
+    localStorage.setItem('answers', roundAnswer);
+  } else { 
     var images = localStorage.getItem('images');
     var titles = localStorage.getItem('titles');
+    var answers = localStorage.getItem('answers');
     images += ";" + imageURL;
-    titles += ";" + titles;
+    titles += ";" + roundTitle;
+    answers += ";" + roundAnswer;
     localStorage.setItem('images', images);
     localStorage.setItem('titles', titles);
+    localStorage.setItem('answers', answers);
   }
   var button = document.getElementById("Save");
   button.innerText = "Saved!";
-  button.style.backgroundColor = "rgb(184, 248, 159)";
+  button.style.backgroundColor = "rgb(175, 211, 161)";
 }
 
 var i = 0;
 //What a mess...
 function displaySavedRounds(direction) {
-  if (localStorage.getItem('images') == null || localStorage.getItem('titles') == null) {
+  if (localStorage.getItem('images') == null || localStorage.getItem('images') == "") {
     alert("There are no saved images!");
   }
   else {
@@ -352,7 +377,10 @@ function displaySavedRounds(direction) {
     } else if (direction == 2) {
       i++;
     } else if (direction == 0) {
-      i = 0;
+      if (document.getElementById("savedRounds").style.display == "block"){
+        document.getElementById("savedRounds").style.display = "none";
+        return true;
+      }
       getRoundNumber();
     }
 
@@ -362,10 +390,15 @@ function displaySavedRounds(direction) {
     var imagesArray = images.split(";");
     image.src = imagesArray[i];
 
-    var title = document.getElementById("displayedTitle")
+    var title = document.getElementById("displayedTitle");
     var titles = localStorage.getItem('titles')
     var titlesArray = titles.split(";");
     title.value = titlesArray[i];
+
+    var answer = document.getElementById("displayedAnswer");
+    var answers = localStorage.getItem('answers')
+    var answersArray = answers.split(";");
+    answer.value = answersArray[i];
 
     if (i <= 0) {
       var left = document.getElementById("left");
@@ -382,6 +415,43 @@ function displaySavedRounds(direction) {
       document.getElementById("right").style.visibility = "visible";
     }
 
+    if (imagesArray.length == 1){
+      document.getElementById("left").style.visibility = "hidden";
+      document.getElementById("right").style.visibility = "hidden";
+    }
+
+  }
+
+}
+
+
+function deleteImage(){
+  var images = localStorage.getItem('images');
+  var imagesArray = images.split(";");
+  
+  var titles = localStorage.getItem('titles')
+  var titlesArray = titles.split(";");
+
+  var answers = localStorage.getItem('answers');
+  var answersArray = answers.split(";");
+
+  imagesArray.shift(i);
+  titlesArray.shift(i);
+  answersArray.shift(i);
+
+  listImages = imagesArray.join(";");
+  listTitles = titlesArray.join(";");
+  listAnswers = answersArray.join(";");
+
+  localStorage.setItem('images', listImages);
+  localStorage.setItem('titles', listTitles);
+  localStorage.setItem('answers', listAnswers);
+
+  if (imagesArray.length == 0){
+    document.getElementById("savedRounds").style.display = "none";
+  } else{
+    i=0;
+    displaySavedRounds(3);
   }
 
 }
