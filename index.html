@@ -28,10 +28,11 @@
     <br>
     <input id="displayedTitle" type="text"> <br>
     <button id="PostReddit2" onclick="postReddit(1)">Submit to /r/PictureGame</button>
-  </div> 
+  </div>
   <div id="container">
     <div id="masker">
-      <fieldset id="tools"> <legend>Tools</legend>
+      <fieldset id="tools">
+        <legend>Tools</legend>
         Set Opacity (0-100):
         <br>
         <div id="slider">
@@ -41,11 +42,12 @@
         <br>
         <div id="zoomSlider">
           Set mask zoom: <br>
-            <input type="range" min="0" max="100" value="50" id="zoom" oninput="updateZoomer()">
+          <input type="range" min="0" max="100" value="50" id="zoom" oninput="updateZoomer()">
         </div>
       </fieldset>
       <br>
-      <fieldset id="masks"> <legend>Masks</legend>
+      <fieldset id="masks">
+        <legend>Masks</legend>
         <br>
         <img width='145' height='145' src='images/1.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/2.png' onclick='loadMask(this)' />
@@ -65,12 +67,15 @@
         <button type="button" id="copyToClipboard" onclick="copyUrl()" style="display: none;">Copy</button>
         <button type="button" id="checkForRIS" onclick="checkRIS()" style="display: none;">Check RIS</button>
         <input type="text" id="roundTitle" placeholder="Round Title">
-        <button type="button" id="PostReddit" onclick="postReddit(2)" style="display: none;">Submit to /r/PictureGame</button>
+        <button type="button" id="PostReddit" onclick="postReddit(2)" style="display: none;">Submit to
+          /r/PictureGame</button>
         <button type="button" id="Save" onclick="saveImage()" style="display: none;">Save round</button>
       </div>
-      <div id="previewImage">
-          <canvas id='canvas'></canvas>
-        <!--<img id='imagePreview'>-->
+      <div  id="previewImage">
+        <img id='imagePreview'>
+      </div>
+      <div id="canvasDiv">
+        <canvas id='canvas'></canvas>
       </div>
     </div>
   </div>

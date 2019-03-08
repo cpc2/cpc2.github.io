@@ -173,10 +173,6 @@ img:hover{
 }
 
 
-#hidden {
-	display: none;
-}
-
 #buttons button, #buttons :first-child, #PostReddit2{
 	background-color: rgb(236, 140, 116);
 	color: white;
@@ -226,6 +222,10 @@ img:hover{
 	padding: 10px;
 	margin-bottom: 10px;
 	font-size: 150%
+}
+
+#previewImage{
+	display: none;
 }
 
 /*#mobilePaste button{

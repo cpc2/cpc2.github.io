@@ -70,11 +70,6 @@ function updatePreview() {
   var image = document.getElementById('imagePreview');
   canvas.renderAll();
   image.src = canvas.toDataURL('image/jpeg', 1.0);
-  if (canvas.width > canvas.height) {
-    image.width = 700;
-  } else {
-    image.height = 700;
-  }
 }
 
 function uploadImage(e) {
@@ -101,15 +96,15 @@ function loadSourceImage(baseUrl, externalImage) {
 
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
-      if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
-      } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+      if (img.height > img.width) {
+        canvas.setWidth(canvasWidth * 800 / img.height);
+        canvas.setHeight(canvasHeight * 800 / img.height);
+      } else {
+        canvas.setWidth(canvas.width * 800 / img.width);
+        canvas.setHeight(canvas.height * 800 / img.width);
       }
 
-      
+
       canvas.setBackgroundImage(new fabric.Image(img), canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
         scaleY: canvas.height / img.height
@@ -126,12 +121,12 @@ function loadSourceImage(baseUrl, externalImage) {
 
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
-      if (img.height>img.width){
-        canvas.setWidth(canvasWidth * 800/img.height);
-        canvas.setHeight(canvasHeight * 800/img.height); 
-      } else{
-        canvas.setWidth(canvas.width * 800/img.width);
-        canvas.setHeight(canvas.height * 800/img.width);
+      if (img.height > img.width) {
+        canvas.setWidth(canvasWidth * 800 / img.height);
+        canvas.setHeight(canvasHeight * 800 / img.height);
+      } else {
+        canvas.setWidth(canvas.width * 800 / img.width);
+        canvas.setHeight(canvas.height * 800 / img.width);
       }
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
@@ -211,53 +206,65 @@ function loadMask(selectedMask) {
 }
 
 function upload() {
+  document.getElementById('canvasDiv').style.display = "none";
+  //canvas.isDrawingMode = false;
+  document.getElementById('previewImage').style.display = "block";
+  updatePreview();
   var originalHeight = sessionStorage.getItem('height');
   var originalWidth = sessionStorage.getItem('width');
-  if (originalHeight > originalWidth){
-    canvas.setZoom(originalHeight/800);
-    canvas.setWidth(canvas.width * originalHeight/800);
-    canvas.setHeight(canvas.height * originalHeight/800);
-  } else{
-    canvas.setZoom(originalWidth/800);
-    canvas.setWidth(canvas.width * originalWidth/800);
-    canvas.setHeight(canvas.height * originalWidth/800);
+  if (originalHeight > originalWidth) {
+    canvas.setZoom(originalHeight / 800);
+    canvas.setWidth(canvas.width * originalHeight / 800);
+    canvas.setHeight(canvas.height * originalHeight / 800);
+  } else {
+    canvas.setZoom(originalWidth / 800);
+    canvas.setWidth(canvas.width * originalWidth / 800);
+    canvas.setHeight(canvas.height * originalWidth / 800);
   }
 
-  var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
+  setTimeout(imgurUpload, 500); 
+  /*I had to set a timeout, otherwise the canvas size change isn't fast enough and the next 
+  line doesn't know what to upload*/
 
-  $.ajax({
-    url: 'https://api.imgur.com/3/image',
-    type: 'post',
-    headers: {
-      Authorization: 'Client-ID 9c586fafe6ec100'
-    },
-    data: {
-      image: img
-    },
-    dataType: 'json',
-    error: function (response) {
-      alert("Error uploading to Imgur. Reason: " + response.responseJSON.data.error);
-      document.getElementById('uploadbutton').value = "Upload to Imgur";
-      document.getElementById('uploadbutton').disabled = false;
-    },
-    success: function (response) {
-      if (response.success) {
-        document.getElementById('uploadedUrl').value = response.data.link;
-        document.getElementById('uploadbutton').style.display = "none";
-        document.getElementById('uploadedUrl').style.display = "inline-block";
-        document.getElementById('copyToClipboard').style.display = "inline-block";
-        document.getElementById('checkForRIS').style.display = "inline-block";
-        document.getElementById('PostReddit').style.display = "inline-block";
-        document.getElementById('roundTitle').style.display = "inline-block";
-        document.getElementById('Save').style.display = "inline-block";
-      } else {
-        alert("Failed to upload.");
+  function imgurUpload() {
+
+    var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
+
+    $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      type: 'post',
+      headers: {
+        Authorization: 'Client-ID 9c586fafe6ec100'
+      },
+      data: {
+        image: img
+      },
+      dataType: 'json',
+      error: function (response) {
+        alert("Error uploading to Imgur. Reason: " + response.responseJSON.data.error);
+        document.getElementById('uploadbutton').value = "Upload to Imgur";
+        document.getElementById('uploadbutton').disabled = false;
+      },
+      success: function (response) {
+        if (response.success) {
+          document.getElementById('uploadedUrl').value = response.data.link;
+          document.getElementById('uploadbutton').style.display = "none";
+          document.getElementById('uploadedUrl').style.display = "inline-block";
+          document.getElementById('copyToClipboard').style.display = "inline-block";
+          document.getElementById('checkForRIS').style.display = "inline-block";
+          document.getElementById('PostReddit').style.display = "inline-block";
+          document.getElementById('roundTitle').style.display = "inline-block";
+          document.getElementById('Save').style.display = "inline-block";
+        } else {
+          alert("Failed to upload.");
+        }
       }
-    }
-  });
-  document.getElementById('uploadbutton').value = "Uploading...";
-  document.getElementById('uploadbutton').disabled = true;
-  getRoundNumber();
+    });
+    document.getElementById('uploadbutton').value = "Uploading...";
+    document.getElementById('uploadbutton').disabled = true;
+    getRoundNumber();
+  }
+
 }
 
 function copyUrl() {
