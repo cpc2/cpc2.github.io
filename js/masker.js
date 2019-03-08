@@ -328,7 +328,7 @@ function saveImage() {
   var roundTitle = document.getElementById("roundTitle").value;
   var roundAnswer = document.getElementById("roundAnswer").value;
 
-  if (localStorage.getItem('images') == null) {
+  if (localStorage.getItem('images') == null || localStorage.getItem('images') == "") {
     localStorage.setItem('images', imageURL);
     localStorage.setItem('titles', roundTitle);
     localStorage.setItem('answers', roundAnswer);
