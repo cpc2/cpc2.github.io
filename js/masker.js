@@ -418,9 +418,9 @@ function deleteImage(){
   var answers = localStorage.getItem('answers');
   var answersArray = answers.split(";");
 
-  imagesArray.shift(i);
-  titlesArray.shift(i);
-  answersArray.shift(i);
+  imagesArray.splice(i,1);
+  titlesArray.splice(i,1);
+  answersArray.splice(i,1);
 
   listImages = imagesArray.join(";");
   listTitles = titlesArray.join(";");
