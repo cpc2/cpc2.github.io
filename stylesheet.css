@@ -246,15 +246,42 @@ img:hover{
 	display: none;
 }
 
-/*#mobilePaste button{
-	border: none;
-	background-color :rgb(226, 207, 182);
-	color:rgb(63, 63, 63);
-	height: 60px;
-}*/
-
 @media screen and (max-aspect-ratio: 11/16) {
 	#mobilePaste{
 		display: block;
 	}
+}
+
+#night{
+	position: absolute;
+	top: 5px;
+	right: 10px;
+    background-color: rgb(240, 214, 181);
+    border: none;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 100%;
+    transition: 0.5s;
+}
+#night:hover{
+    background-color: rgb(240, 216, 173);
+}
+
+#night:focus {
+    outline:0;
+}
+
+body.night{
+	background-color: rgb(24, 24, 34);
+	transition: 0.5s;
+	color: whitesmoke;
+}
+
+#uploadlabel.night, #displayRounds.night, #tools.night, #masks.night{
+	background-color: rgb(52, 57, 107);
+	color: rgb(228, 226, 226);
+}
+
+#uploadlabel.night:hover{
+	background-color: rgb(71, 77, 146);
 }

@@ -1,5 +1,6 @@
 var baseImage = null;
 var maskImage = null;
+var isNight;
 var canvasHeight, canvasWidth;
 var imgHeight, imgWidth;
 var number;
@@ -8,6 +9,7 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
   isDrawingMode: true
 });
 document.getElementById('container').style.display = "none";
+
 
 canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
 canvas.freeDrawingBrush.width = 10;
@@ -90,11 +92,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 800 / img.height);
-        canvas.setHeight(canvasHeight * 800 / img.height);
+        canvas.setWidth(canvasWidth * 900 / img.height);
+        canvas.setHeight(canvasHeight * 900 / img.height);
       } else {
-        canvas.setWidth(canvas.width * 800 / img.width);
-        canvas.setHeight(canvas.height * 800 / img.width);
+        canvas.setWidth(canvas.width * 900 / img.width);
+        canvas.setHeight(canvas.height * 900 / img.width);
       }
 
 
@@ -114,11 +116,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 800 / img.height);
-        canvas.setHeight(canvasHeight * 800 / img.height);
+        canvas.setWidth(canvasWidth * 900 / img.height);
+        canvas.setHeight(canvasHeight * 900 / img.height);
       } else {
-        canvas.setWidth(canvas.width * 800 / img.width);
-        canvas.setHeight(canvas.height * 800 / img.width);
+        canvas.setWidth(canvas.width * 900 / img.width);
+        canvas.setHeight(canvas.height * 900 / img.width);
       }
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
@@ -204,13 +206,13 @@ function upload() {
   document.getElementById('previewImage').style.display = "block";
   updatePreview();
   if (imgHeight > imgWidth) {
-    canvas.setZoom(imgHeight / 800);
-    canvas.setWidth(canvas.width * imgHeight / 800);
-    canvas.setHeight(canvas.height * imgHeight / 800);
+    canvas.setZoom(imgHeight / 900);
+    canvas.setWidth(canvas.width * imgHeight / 900);
+    canvas.setHeight(canvas.height * imgHeight / 900);
   } else {
-    canvas.setZoom(imgWidth / 800);
-    canvas.setWidth(canvas.width * imgWidth / 800);
-    canvas.setHeight(canvas.height * imgWidth / 800);
+    canvas.setZoom(imgWidth / 900);
+    canvas.setWidth(canvas.width * imgWidth / 900);
+    canvas.setHeight(canvas.height * imgWidth / 900);
   }
 
   setTimeout(imgurUpload, 250); 
@@ -268,10 +270,11 @@ function copyUrl() {
 function checkRIS() {
   //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
-  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
+  window.open("http://www.tineye.com/search/?url=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
-  window.open("http://www.tineye.com/search/?url=" + url);
+  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
+
 
 }
 
@@ -443,4 +446,41 @@ function deleteImage(){
     displaySavedRounds(3);
   }
 
+}
+
+
+var toggleState = localStorage.getItem('Night');
+if(toggleState == "true"){
+    isNight = false;
+    toggle();
+}
+function toggle() {
+    if (isNight == true) {
+        day();
+    } else {
+        night();
+    }
+}
+
+function night() {
+    localStorage.setItem("Night", true);
+    var night = document.getElementsByClassName("color");
+    for (i=0; i<night.length;i++) {
+        night[i].classList.add("night");
+    }
+    var icon = document.getElementById("night");
+    icon.innerHTML="🌞";
+    icon.style.backgroundColor="rgb(55, 48, 77)";
+    isNight = true;
+}
+function day() {
+    localStorage.setItem('Night', false);
+    var day = document.getElementsByClassName("color");
+    for (i=0; i<day.length;i++) {
+        day[i].classList.remove("night");
+    }
+    var icon = document.getElementById("night");
+    icon.innerHTML="🌙";
+    icon.style.backgroundColor="rgb(240, 214, 181)";
+    isNight = false;
 }
