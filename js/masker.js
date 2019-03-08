@@ -206,7 +206,7 @@ function loadMask(selectedMask) {
 }
 
 function upload() {
-  var originalHeight = sessionStorage.getItem('height');
+  /*var originalHeight = sessionStorage.getItem('height');
   var originalWidth = sessionStorage.getItem('width');
   if (originalHeight > originalWidth){
     canvas.setZoom(originalHeight/800);
@@ -216,7 +216,7 @@ function upload() {
     canvas.setZoom(originalWidth/800);
     canvas.setWidth(canvas.width * originalWidth/800);
     canvas.setHeight(canvas.height * originalWidth/800);
-  }
+  }*/
 
   var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
