@@ -250,7 +250,7 @@ img:hover{
 #previewImage{
 	display: none;
 }
-
+/*
 #myMasks{
 	display: none;
 	float: right;
@@ -293,7 +293,7 @@ img:hover{
 
 
 }
-
+*/
 /*Without this input mobile users can't paste URLs*/
 @media screen and (max-aspect-ratio: 11/16) {
 	#mobilePaste{

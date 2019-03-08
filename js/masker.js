@@ -130,7 +130,7 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('mobilePaste').style.display = "none";
   document.getElementById('container').style.display = "grid";
   document.getElementById('uploadbutton').style.visibility = "visible";
-  document.getElementById('myMasks').style.display = "grid";
+  //document.getElementById('myMasks').style.display = "grid";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
 }
@@ -439,7 +439,7 @@ function deleteImage(){
   }
 
 }
-
+/*
 function addMask(){
   var br = document.getElementById("br");
   var maskURL = document.getElementById("maskURL");
@@ -449,4 +449,4 @@ function addMask(){
   }
   br.insertAdjacentHTML('afterend', "<img width='145' height='145' src=\"" + url + "\" onclick='loadMask(this)' />")
   
-}
+}*/
