@@ -304,7 +304,7 @@ function getRoundNumber() {
     var i = text.search("roundNumber\":");
     var roundNumber = text.substr(i + 13, 5);
     var nextRound = parseInt(roundNumber) + 1;
-    setTimeout(saveNumber, 400);
+    setTimeout(saveNumber, 600);
     function saveNumber() {
       number = nextRound;
     }
