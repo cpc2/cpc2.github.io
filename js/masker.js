@@ -208,7 +208,7 @@ function upload() {
     canvas.setHeight(canvas.height * imgWidth / 1100);
   }
 
-  setTimeout(imgurUpload, 250); 
+  setTimeout(imgurUpload, 250);
   /*I had to set a timeout, otherwise the canvas size change isn't fast enough and the next 
   line doesn't know what to upload.. I'll leave it at 500ms just in case.*/
 
@@ -286,12 +286,12 @@ function updateZoomer() {
   canvas.renderAll();
 }
 
-function brushSize(){
+function brushSize() {
   var brushSize = document.getElementById("brushSize");
   canvas.freeDrawingBrush.width = brushSize.value;
 }
 
-function colorSelect(){
+function colorSelect() {
   var color = document.getElementById("colorSelect");
   canvas.freeDrawingBrush.color = color.value;
 }
@@ -304,7 +304,10 @@ function getRoundNumber() {
     var i = text.search("roundNumber\":");
     var roundNumber = text.substr(i + 13, 5);
     var nextRound = parseInt(roundNumber) + 1;
-    number = nextRound;
+    setTimeout(saveNumber, 400);
+    function saveNumber() {
+      number = nextRound;
+    }
   }
   request.send();
 }
@@ -333,7 +336,7 @@ function saveImage() {
     localStorage.setItem('images', imageURL);
     localStorage.setItem('titles', roundTitle);
     localStorage.setItem('answers', roundAnswer);
-  } else { 
+  } else {
     var images = localStorage.getItem('images');
     var titles = localStorage.getItem('titles');
     var answers = localStorage.getItem('answers');
@@ -361,7 +364,7 @@ function displaySavedRounds(direction) {
     } else if (direction == 2) {
       i++;
     } else if (direction == 0) {
-      if (document.getElementById("savedRounds").style.display == "block"){
+      if (document.getElementById("savedRounds").style.display == "block") {
         document.getElementById("savedRounds").style.display = "none";
         return true;
       }
@@ -398,7 +401,7 @@ function displaySavedRounds(direction) {
       document.getElementById("right").style.visibility = "visible";
     }
 
-    if (imagesArray.length == 1){
+    if (imagesArray.length == 1) {
       document.getElementById("left").style.visibility = "hidden";
       document.getElementById("right").style.visibility = "hidden";
     }
@@ -408,19 +411,19 @@ function displaySavedRounds(direction) {
 }
 
 
-function deleteImage(){
+function deleteImage() {
   var images = localStorage.getItem('images');
   var imagesArray = images.split(";");
-  
+
   var titles = localStorage.getItem('titles')
   var titlesArray = titles.split(";");
 
   var answers = localStorage.getItem('answers');
   var answersArray = answers.split(";");
 
-  imagesArray.splice(i,1);
-  titlesArray.splice(i,1);
-  answersArray.splice(i,1);
+  imagesArray.splice(i, 1);
+  titlesArray.splice(i, 1);
+  answersArray.splice(i, 1);
 
   listImages = imagesArray.join(";");
   listTitles = titlesArray.join(";");
@@ -430,10 +433,10 @@ function deleteImage(){
   localStorage.setItem('titles', listTitles);
   localStorage.setItem('answers', listAnswers);
 
-  if (imagesArray.length == 0){
+  if (imagesArray.length == 0) {
     document.getElementById("savedRounds").style.display = "none";
-  } else{
-    i=0;
+  } else {
+    i = 0;
     displaySavedRounds(3);
   }
 
@@ -447,5 +450,5 @@ function addMask(){
     url = "https://" + url;
   }
   br.insertAdjacentHTML('afterend', "<img width='145' height='145' src=\"" + url + "\" onclick='loadMask(this)' />")
-  
+
 }*/
