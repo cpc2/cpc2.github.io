@@ -90,11 +90,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 900 / img.height);
-        canvas.setHeight(canvasHeight * 900 / img.height);
+        canvas.setWidth(canvasWidth * 850 / img.height);
+        canvas.setHeight(canvasHeight * 850 / img.height);
       } else {
-        canvas.setWidth(canvas.width * 900 / img.width);
-        canvas.setHeight(canvas.height * 900 / img.width);
+        canvas.setWidth(canvas.width * 1100 / img.width);
+        canvas.setHeight(canvas.height * 1100 / img.width);
       }
 
 
@@ -113,11 +113,11 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 900 / img.height);
-        canvas.setHeight(canvasHeight * 900 / img.height);
+        canvas.setWidth(canvasWidth * 850 / img.height);
+        canvas.setHeight(canvasHeight * 8500 / img.height);
       } else {
-        canvas.setWidth(canvas.width * 900 / img.width);
-        canvas.setHeight(canvas.height * 900 / img.width);
+        canvas.setWidth(canvas.width * 1100 / img.width);
+        canvas.setHeight(canvas.height * 1100 / img.width);
       }
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
@@ -199,13 +199,13 @@ function upload() {
   document.getElementById('previewImage').style.display = "block";
   updatePreview();
   if (imgHeight > imgWidth) {
-    canvas.setZoom(imgHeight / 900);
-    canvas.setWidth(canvas.width * imgHeight / 900);
-    canvas.setHeight(canvas.height * imgHeight / 900);
+    canvas.setZoom(imgHeight / 850);
+    canvas.setWidth(canvas.width * imgHeight / 850);
+    canvas.setHeight(canvas.height * imgHeight / 850);
   } else {
-    canvas.setZoom(imgWidth / 900);
-    canvas.setWidth(canvas.width * imgWidth / 900);
-    canvas.setHeight(canvas.height * imgWidth / 900);
+    canvas.setZoom(imgWidth / 1100);
+    canvas.setWidth(canvas.width * imgWidth / 1100);
+    canvas.setHeight(canvas.height * imgWidth / 1100);
   }
 
   setTimeout(imgurUpload, 250); 
