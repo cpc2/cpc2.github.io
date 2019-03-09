@@ -291,7 +291,6 @@ function colorSelect() {
 }
 
 function postReddit(i) {
-  getRoundNumber();
   var request = new XMLHttpRequest();
   request.open("GET", "https://api.picturegame.co/current", true);
   request.onload = () => {
