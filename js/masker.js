@@ -249,7 +249,6 @@ function upload() {
     document.getElementById('uploadbutton').value = "Uploading...";
     document.getElementById('uploadbutton').disabled = true;
   }
-  getRoundNumber();
 }
 
 function copyUrl() {
@@ -297,7 +296,7 @@ function colorSelect() {
 
 function getRoundNumber() {
   var request = new XMLHttpRequest();
-  request.open("GET", "https://api.picturegame.co/current", true);
+  request.open("GET", "https://api.picturegame.co/current", false);
   request.onload = () => {
     var text = request.responseText
     var i = text.search("roundNumber\":");
@@ -309,6 +308,7 @@ function getRoundNumber() {
 }
 
 function postReddit(i) {
+  getRoundNumber();
   var round = "[Round " + number + "] ";
   if (i == 2) {
     var imageLink = document.getElementById("uploadedUrl").value;
@@ -363,7 +363,6 @@ function displaySavedRounds(direction) {
         document.getElementById("savedRounds").style.display = "none";
         return true;
       }
-      getRoundNumber();
 
     }
 
