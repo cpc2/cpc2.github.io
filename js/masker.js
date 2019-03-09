@@ -90,8 +90,8 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 850 / img.height);
-        canvas.setHeight(canvasHeight * 850 / img.height);
+        canvas.setWidth(canvasWidth * 800 / img.height);
+        canvas.setHeight(canvasHeight * 800 / img.height);
       } else {
         canvas.setWidth(canvas.width * 1100 / img.width);
         canvas.setHeight(canvas.height * 1100 / img.width);
@@ -113,8 +113,8 @@ function loadSourceImage(baseUrl, externalImage) {
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
 
       if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 850 / img.height);
-        canvas.setHeight(canvasHeight * 8500 / img.height);
+        canvas.setWidth(canvasWidth * 800 / img.height);
+        canvas.setHeight(canvasHeight * 800 / img.height);
       } else {
         canvas.setWidth(canvas.width * 1100 / img.width);
         canvas.setHeight(canvas.height * 1100 / img.width);
@@ -129,6 +129,7 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('uploader').style.display = "none";
   document.getElementById('mobilePaste').style.display = "none";
   document.getElementById('container').style.display = "grid";
+  document.getElementById('uploadbutton').style.display = "block";
   document.getElementById('uploadbutton').style.visibility = "visible";
   //document.getElementById('myMasks').style.display = "grid";
   document.getElementById('savedRounds').style.display = "none";
@@ -164,8 +165,6 @@ function loadMask(selectedMask) {
       slider.value = 70;
     }
     if (requiresMinimize(canvasWidth, mask.width) || requiresMinimize(canvasHeight, mask.height)) {
-      //maskImage.set('scaleX', 0.5);
-      //maskImage.set('scaleY', 0.5);
       slider.value = 40;
     }
     maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
@@ -199,9 +198,9 @@ function upload() {
   document.getElementById('previewImage').style.display = "block";
   updatePreview();
   if (imgHeight > imgWidth) {
-    canvas.setZoom(imgHeight / 850);
-    canvas.setWidth(canvas.width * imgHeight / 850);
-    canvas.setHeight(canvas.height * imgHeight / 850);
+    canvas.setZoom(imgHeight / 800);
+    canvas.setWidth(canvas.width * imgHeight / 800);
+    canvas.setHeight(canvas.height * imgHeight / 800);
   } else {
     canvas.setZoom(imgWidth / 1100);
     canvas.setWidth(canvas.width * imgWidth / 1100);
@@ -250,7 +249,7 @@ function upload() {
     document.getElementById('uploadbutton').value = "Uploading...";
     document.getElementById('uploadbutton').disabled = true;
   }
-
+  getRoundNumber();
 }
 
 function copyUrl() {
@@ -304,16 +303,12 @@ function getRoundNumber() {
     var i = text.search("roundNumber\":");
     var roundNumber = text.substr(i + 13, 5);
     var nextRound = parseInt(roundNumber) + 1;
-    setTimeout(saveNumber, 1000);
-    function saveNumber() {
-      number = nextRound;
-    }
+    number = nextRound;
   }
   request.send();
 }
 
 function postReddit(i) {
-  getRoundNumber();
   var round = "[Round " + number + "] ";
   if (i == 2) {
     var imageLink = document.getElementById("uploadedUrl").value;
@@ -368,6 +363,8 @@ function displaySavedRounds(direction) {
         document.getElementById("savedRounds").style.display = "none";
         return true;
       }
+      getRoundNumber();
+
     }
 
     document.getElementById("savedRounds").style.display = "block";
