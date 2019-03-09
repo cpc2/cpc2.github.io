@@ -249,7 +249,6 @@ function upload() {
     });
     document.getElementById('uploadbutton').value = "Uploading...";
     document.getElementById('uploadbutton').disabled = true;
-    getRoundNumber();
   }
 
 }
@@ -311,6 +310,7 @@ function getRoundNumber() {
 }
 
 function postReddit(i) {
+  getRoundNumber();
   var round = "[Round " + number + "] ";
   if (i == 2) {
     var imageLink = document.getElementById("uploadedUrl").value;
@@ -365,7 +365,6 @@ function displaySavedRounds(direction) {
         document.getElementById("savedRounds").style.display = "none";
         return true;
       }
-      getRoundNumber();
     }
 
     document.getElementById("savedRounds").style.display = "block";
