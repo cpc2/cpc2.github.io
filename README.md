@@ -4,8 +4,7 @@ This is a fork of imagemasker.github.io with updated CSS, mask rotation and expe
 
 ## TODO
 
-* Drag and drop files
+* Drag and drop files - Not a priority
 * More editing tools? (as long as it doesn't get too heavy)
-* "My masks" section with custom uploaded masks?
-* Night mode
+* "My masks" section with custom uploaded masks? - Tried it and I wasn't too convinced
 * Clean everything, it has become an unoptimized mess
