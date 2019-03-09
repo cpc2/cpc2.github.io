@@ -1,7 +1,6 @@
 var maskImage = null;
 var canvasHeight, canvasWidth;
 var imgHeight, imgWidth;
-var number;
 var mask = null;
 var canvas = new fabric.Canvas(document.getElementById('canvas'), {
   isDrawingMode: true
@@ -208,9 +207,6 @@ function upload() {
   }
 
   setTimeout(imgurUpload, 250);
-  /*I had to set a timeout, otherwise the canvas size change isn't fast enough and the next 
-  line doesn't know what to upload.. I'll leave it at 500ms just in case.*/
-
   function imgurUpload() {
 
     var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
@@ -294,31 +290,28 @@ function colorSelect() {
   canvas.freeDrawingBrush.color = color.value;
 }
 
-function getRoundNumber() {
+function postReddit(i) {
+  getRoundNumber();
   var request = new XMLHttpRequest();
-  request.open("GET", "https://api.picturegame.co/current", false);
+  request.open("GET", "https://api.picturegame.co/current", true);
   request.onload = () => {
     var text = request.responseText
     var i = text.search("roundNumber\":");
     var roundNumber = text.substr(i + 13, 5);
     var nextRound = parseInt(roundNumber) + 1;
-    number = nextRound;
+    var round = "[Round " + nextRound + "] ";
+    if (i == 2) {
+      var imageLink = document.getElementById("uploadedUrl").value;
+      var roundTitle = document.getElementById("roundTitle").value;
+    } else {
+      var imageLink = document.getElementById("displayedImage").src;
+      var roundTitle = document.getElementById("displayedTitle").value;
+    }
+    var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
+    window.open(redditLink);
   }
   request.send();
-}
 
-function postReddit(i) {
-  getRoundNumber();
-  var round = "[Round " + number + "] ";
-  if (i == 2) {
-    var imageLink = document.getElementById("uploadedUrl").value;
-    var roundTitle = document.getElementById("roundTitle").value;
-  } else {
-    var imageLink = document.getElementById("displayedImage").src;
-    var roundTitle = document.getElementById("displayedTitle").value;
-  }
-  var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
-  window.open(redditLink);
 }
 
 function saveImage() {
