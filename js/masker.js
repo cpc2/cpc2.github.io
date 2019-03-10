@@ -259,8 +259,7 @@ function copyUrl() {
 function checkRIS() {
   //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
-  //window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
-  window.open("https://www.yandex.com/images/search?url=" + url + "&rpt=imagelike");
+  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
   window.open("http://www.tineye.com/search/?url=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
