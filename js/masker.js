@@ -256,12 +256,25 @@ function copyUrl() {
 function checkRIS() {
   //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
+  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
   window.open("http://www.tineye.com/search/?url=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
-  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
-
-
+  
+  document.getElementById("previewImage").style.display = "none";
+  /*if (imgHeight > imgWidth) {
+    canvas.setZoom(800 / imgHeight);
+    canvas.setWidth(canvas.width * 800 / imgHeight);
+    canvas.setHeight(canvas.height * 800 / imgHeight);
+  } else {
+    canvas.setZoom(800 / imgWidth);
+    canvas.setWidth(canvas.width * 1100 / imgWidth);
+    canvas.setHeight(canvas.height * 1100 / imgWidth);
+  }*/
+  document.getElementById('canvasDiv').style.display = "block";
+  document.getElementById('uploadbutton').style.display = "block";
+  document.getElementById('uploadbutton').disabled = false;
+  document.getElementById('uploadbutton').value = "Reupload";
 }
 
 function updateOpacity() {
