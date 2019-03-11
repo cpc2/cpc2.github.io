@@ -461,7 +461,7 @@ function addMask(file) {
     gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
 
     if (localStorage.getItem('masks') == null || localStorage.getItem('masks') == "") {
-      localStorage.setItem('images', uploadedMask);
+      localStorage.setItem('masks', uploadedMask);
     } else {
       var masks = localStorage.getItem('masks');
       masks += ";" + uploadedMask;
