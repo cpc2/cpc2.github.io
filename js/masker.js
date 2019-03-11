@@ -178,7 +178,7 @@ function loadMask(selectedMask) {
     maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
 
     maskImage.rotate(Math.random() * 4 - 2);
-    maskImage.set({ transformMatrix: [1, Math.random() / 5, Math.random() / 5, 1, 0, 0] });
+    maskImage.set({ transformMatrix: [1, (Math.random() / 5) - 0.1, (Math.random() / 5) - 0.1, 1, 0, 0] });
     maskImage.set('originX', 'center');
     maskImage.set('originY', 'center');
     maskImage.set('top', canvas.height / 2);
@@ -447,9 +447,9 @@ function deleteImage() {
 
 }
 
-function addMask(file) {
+/*function addMask(file) {
   //mostly copied from http://paulrouget.com/miniuploader/
-  if (!file || !file.type.match(/image.*/)) return;
+  if (!file || !file.type.match(/image.*)) return;
   var fd = new FormData();
   fd.append("image", file);
   var xhr = new XMLHttpRequest();
@@ -472,21 +472,35 @@ function addMask(file) {
   xhr.send(fd);
 
 }
+*/
 
+function addMask(){
+  var br = document.getElementById("br");
+  var uploadedMask = document.getElementById("customMaskURL").value;
+  gridMasks.insertAdjacentHTML('beforbegin', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
+
+  if (localStorage.getItem('masks') == null || localStorage.getItem('masks') == "") {
+    localStorage.setItem('masks', uploadedMask);
+  } else {
+    var masks = localStorage.getItem('masks');
+    masks += ";" + uploadedMask;
+    localStorage.setItem('masks', masks);
+  }
+}
 
 function clearMasks() {
   localStorage.removeItem("masks");
-  removedMasks = document.getElementsByClassName;
+  removedMasks = document.getElementsByClassName("myMasks");
   for (i = 0; i < removedMasks; i++) {
     removedMasks[i].style.display = "none";
   }
 }
 
-var gridMasks = document.getElementById("masks");
+var br = document.getElementById("br");
 if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "") {
   var savedMasks = localStorage.getItem("masks");
   var masksArray = savedMasks.split(";");
   for (i = 0; i < masksArray.length; i++) {
-    gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
+    br.insertAdjacentHTML('beforebegin', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
   }
 }

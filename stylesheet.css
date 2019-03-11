@@ -200,7 +200,7 @@ img:hover{
 }
 
 
-#buttons button, #buttons :first-child, #PostReddit2, #delete, #uploadMaskLabel, #clearMasks{
+#buttons button, #buttons :first-child, #PostReddit2, #delete, #addMask, #clearMasks{
 	background-color: rgb(236, 140, 116);
 	color: white;
 	border: none;
@@ -215,7 +215,7 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer{
+#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer, #customMaskURL{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
@@ -230,7 +230,7 @@ img:hover{
 	margin-top: 10px;
 }
 
-#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder{
+#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder, #customMaskURL::placeholder{
 	color: rgb(230, 230, 230);
 }
 
@@ -298,23 +298,29 @@ img:hover{
 
 }
 */
-#uploadMaskLabel{
-	width: 42%;
+#customMaskURL{
+	width: 92%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#addMask{
+	width: 49%;
 	font-size: 95%;
 }
 
 #clearMasks{
-	width: 48%;
+	width: 49%;
 	font-size: 95%;
 }
 
-#uploadMaskLabel, #clearMasks{
+#addMask, #clearMasks{
 	border-radius: 5px;
 	margin-bottom: 5px;
 
 }
 
-#uploadMaskLabel:hover, #clearMasks:hover{
+#addMask:hover, #clearMasks:hover{
 	background-color: rgb(240, 161, 142);
 }
 /*Without this input mobile users can't paste URLs*/
@@ -361,15 +367,15 @@ body.night{
 	background-color: rgb(71, 77, 146);
 }
 
-#buttons.night *, #buttons.night :first-child, #uploadMaskLabel.night, #clearMasks.night{
+#buttons.night *, #buttons.night :first-child, #addMask.night, #clearMasks.night{
 	background-color: rgb(53, 44, 95);
 }
 
-#buttons.night button:hover, #buttons.night :first-child:hover, #uploadMaskLabel.night:hover, #clearMasks.night:hover{
+#buttons.night button:hover, #buttons.night :first-child:hover, #addMask.night:hover, #clearMasks.night:hover{
 	background-color: rgb(71, 77, 146);
 }
 
-#displayedTitle.night, #displayedAnswer.night, #buttons.night input, #myMasks input.night, #pastedURL.night{
+#displayedTitle.night, #displayedAnswer.night, #buttons.night input, #myMasks input.night, #pastedURL.night, #customMaskURL.night{
 	background-color: rgb(74, 59, 136);
 }
 
