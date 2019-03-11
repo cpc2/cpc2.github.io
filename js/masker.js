@@ -482,11 +482,11 @@ function clearMasks() {
   }
 }
 
-/*var gridMasks = document.getElementById("masks");
+var gridMasks = document.getElementById("masks");
 if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "") {
   var savedMasks = localStorage.getItem("masks");
   var masksArray = savedMasks.split(";");
   for (i = 0; i < masksArray.length; i++) {
     gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
   }
-}*/
+}
