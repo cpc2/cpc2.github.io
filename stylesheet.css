@@ -167,6 +167,10 @@ img:hover{
 	font-size: 1.2em;
 }
 
+#displayRounds:focus{
+	outline:0;
+}
+
 #displayedTitle, #displayedAnswer{
 	position: relative;
 	margin: 5px;

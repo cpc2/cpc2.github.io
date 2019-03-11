@@ -453,8 +453,9 @@ function addMask(file) {
   var fd = new FormData();
   fd.append("image", file);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://api.imgur.com/3/image.json");
+  xhr.open("POST", "https://api.imgur.com/3/image");
   xhr.onload = function () {
+
     var gridMasks = document.getElementById("masks");
     var uploadedMask = JSON.parse(xhr.responseText).data.link;
     gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
@@ -466,17 +467,17 @@ function addMask(file) {
       masks += ";" + uploadedMask;
       localStorage.setItem('masks', masks);
     }
-    xhr.setRequestHeader('Authorization', 'Client-ID 9c586fafe6ec100');
-    xhr.send(fd);
-
   }
+  xhr.setRequestHeader('Authorization', 'Client-ID 9c586fafe6ec100');
+  xhr.send(fd);
+
 }
 
 
 function clearMasks() {
   localStorage.removeItem("masks");
   removedMasks = document.getElementsByClassName;
-  for (i=0; i<removedMasks;i++){
+  for (i = 0; i < removedMasks; i++) {
     removedMasks[i].style.display = "none";
   }
 }
