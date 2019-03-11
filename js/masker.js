@@ -7,6 +7,8 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
 });
 document.getElementById('container').style.display = "none";
 
+window.ondragover = function (e) { e.preventDefault() }
+window.ondrop = function (e) { e.preventDefault(); uploadDragnDrop(e.dataTransfer.files[0]); }
 
 canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
 canvas.freeDrawingBrush.width = 10;
@@ -72,6 +74,13 @@ function uploadImage(e) {
   }
 }
 
+function uploadDragnDrop(file) {
+  var url = URL.createObjectURL(file);
+  loadSourceImage(url, false);
+  //it doesn't check, if the file is an image, 
+  //but I'll just assume they know they are uploading an image...
+}
+
 function loadSourceImage(baseUrl, externalImage) {
 
   var resizeFactor = Math.random() * 0.1 + 0.9;
@@ -130,7 +139,6 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('container').style.display = "grid";
   document.getElementById('uploadbutton').style.display = "block";
   document.getElementById('uploadbutton').style.visibility = "visible";
-  //document.getElementById('myMasks').style.display = "grid";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
 }
@@ -244,7 +252,6 @@ function copyUrl() {
 }
 
 function checkRIS() {
-  //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
   var popUp = window.open("http://www.tineye.com/search/?url=" + url);
@@ -256,7 +263,7 @@ function checkRIS() {
   }
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
   window.open("http://www.google.com/searchbyimage?image_url=" + url);
-  
+
 
   document.getElementById("previewImage").style.display = "none";
   if (imgHeight > imgWidth) {
@@ -439,14 +446,42 @@ function deleteImage() {
   }
 
 }
-/*
-function addMask(){
-  var br = document.getElementById("br");
-  var maskURL = document.getElementById("maskURL");
-  var url = maskURL.value;
-  if (url.substring(0,4) != "http"){
-    url = "https://" + url;
-  }
-  br.insertAdjacentHTML('afterend', "<img width='145' height='145' src=\"" + url + "\" onclick='loadMask(this)' />")
 
-}*/
+function addMask(file) {
+  //mostly copied from http://paulrouget.com/miniuploader/
+  if (!file || !file.type.match(/image.*/)) return;
+  var fd = new FormData();
+  fd.append("image", file);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://api.imgur.com/3/image.json");
+  xhr.onload = function () {
+    var masks = document.getElementById("masks");
+    masks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + JSON.parse(xhr.responseText).data.link + "\" onclick='loadMask(this)' />")
+  }
+  xhr.setRequestHeader('Authorization', 'Client-ID 9c586fafe6ec100');
+  xhr.send(fd);
+
+  /*$.ajax({
+    url: 'https://api.imgur.com/3/image',
+    type: 'post',
+    headers: {
+      Authorization: 'Client-ID 9c586fafe6ec100'
+    },
+    data: {
+      image: file
+    },
+    dataType: 'json',
+    error: function (response) {
+      alert("Error uploading mask to Imgur. Reason: " + response.responseJSON.data.error);
+    },
+    success: function (response) {
+      if (response.success) {
+        var masks = document.getElementById("masks");
+        masks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + response.data.link + "\" onclick='loadMask(this)' />")
+      } else {
+        alert("Failed to upload.");
+      }
+    }
+  });*/
+
+}

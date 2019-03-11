@@ -15,7 +15,7 @@
   <script src="js/night.js"></script>
   <div id="uploader">
     <label class="color" id="uploadlabel" for="imageUpload" style="cursor:pointer;">
-      Paste image or click here to upload an image.
+      Paste, drag & drop or click here to upload an image
     </label>
     <input type="file" id="imageUpload" style="display: none;" onchange="uploadImage(event)">
   </div>
@@ -57,15 +57,17 @@
       <fieldset class="color" id="masks">
         <legend>Masks</legend>
         <br>
+        <input class="color" id="uploadMask" type="file" value="Upload mask" onchange="addMask(this.files[0])"> <button class="color" id="clearMasks" type="button" onclick="clearMasks()">Clear custom masks</button>
+        <br>
         <img width='145' height='145' src='images/1.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/2.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/3.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/4.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/5.png' onclick='loadMask(this)' />
-        <label for="uploadMask" style="cursor: pointer;">
+        <!--<label for="uploadMask" style="cursor: pointer;">
           <img width='145' height='145' src='images/upload.png' />
         </label>
-        <input type="file" id="uploadMask" style="display: none;" onchange="loadMask(event)">
+        <input type="file" id="uploadMask" style="display: none;" onchange="loadMask(event)">-->
       </fieldset>
     </div>
     <div id="preview">
