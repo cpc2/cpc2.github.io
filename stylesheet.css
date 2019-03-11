@@ -165,6 +165,7 @@ img:hover{
 	margin-top: 3em;
 	transform: translate(-50%, -50%);
 	font-size: 1.2em;
+	transition: 0.5s;
 }
 
 #displayRounds:hover{
