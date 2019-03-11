@@ -7,8 +7,9 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
 });
 document.getElementById('container').style.display = "none";
 
-window.ondragover = function (e) { e.preventDefault() }
-window.ondrop = function (e) { e.preventDefault(); uploadDragnDrop(e.dataTransfer.files[0]); }
+var uploadArea = document.getElementById('uploader');
+uploadArea.ondragover = function (e) { e.preventDefault() }
+uploadArea.ondrop = function (e) { e.preventDefault(); uploadDragnDrop(e.dataTransfer.files[0]); }
 
 canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
 canvas.freeDrawingBrush.width = 10;
@@ -477,7 +478,7 @@ function deleteImage() {
 function addMask(){
   var br = document.getElementById("br");
   var uploadedMask = document.getElementById("customMaskURL").value;
-  gridMasks.insertAdjacentHTML('beforbegin', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
+  br.insertAdjacentHTML('beforbegin', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
 
   if (localStorage.getItem('masks') == null || localStorage.getItem('masks') == "") {
     localStorage.setItem('masks', uploadedMask);
@@ -503,4 +504,4 @@ if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != ""
   for (i = 0; i < masksArray.length; i++) {
     br.insertAdjacentHTML('beforebegin', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
   }
-}
+} else{}
