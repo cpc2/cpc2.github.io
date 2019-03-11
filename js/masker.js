@@ -490,15 +490,15 @@ function addMask(){
 }
 
 function clearMasks() {
-  localStorage.removeItem("masks");
-  removedMasks = document.getElementsByClassName("myMasks");
-  for (i = 0; i < removedMasks; i++) {
+  var removedMasks = document.getElementsByClassName("myMasks");
+  for (i = 0; i < removedMasks.length; i++) {
     removedMasks[i].style.display = "none";
   }
+  localStorage.removeItem("masks");
 }
 
 var br = document.getElementById("br");
-if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "") {
+if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "" || localStorage.getItem('masks') != undefined) {
   var savedMasks = localStorage.getItem("masks");
   var masksArray = savedMasks.split(";");
   for (i = 0; i < masksArray.length; i++) {
