@@ -455,33 +455,30 @@ function addMask(file) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "https://api.imgur.com/3/image.json");
   xhr.onload = function () {
-    var masks = document.getElementById("masks");
-    masks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + JSON.parse(xhr.responseText).data.link + "\" onclick='loadMask(this)' />")
-  }
-  xhr.setRequestHeader('Authorization', 'Client-ID 9c586fafe6ec100');
-  xhr.send(fd);
+    var gridMasks = document.getElementById("masks");
+    var uploadedMask = JSON.parse(xhr.responseText).data.link;
+    gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
 
-  /*$.ajax({
-    url: 'https://api.imgur.com/3/image',
-    type: 'post',
-    headers: {
-      Authorization: 'Client-ID 9c586fafe6ec100'
-    },
-    data: {
-      image: file
-    },
-    dataType: 'json',
-    error: function (response) {
-      alert("Error uploading mask to Imgur. Reason: " + response.responseJSON.data.error);
-    },
-    success: function (response) {
-      if (response.success) {
-        var masks = document.getElementById("masks");
-        masks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + response.data.link + "\" onclick='loadMask(this)' />")
-      } else {
-        alert("Failed to upload.");
-      }
+    if (localStorage.getItem('masks') == null || localStorage.getItem('masks') == "") {
+      localStorage.setItem('images', uploadedMask);
+    } else {
+      var masks = localStorage.getItem('masks');
+      masks += ";" + uploadedMask;
+      localStorage.setItem('masks', masks);
     }
-  });*/
+    xhr.setRequestHeader('Authorization', 'Client-ID 9c586fafe6ec100');
+    xhr.send(fd);
 
+  }
+}
+
+var gridMasks = document.getElementById("masks");
+function clearMasks(){
+  localStorage.removeItem("masks");
+}
+
+var savedMasks = localStorage.getItem("masks");
+var masksArray = savedMasks.split(";");
+for (i=0; i<masksArray.length;i++){
+  gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
 }

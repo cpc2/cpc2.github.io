@@ -58,7 +58,8 @@
         <legend>Masks</legend>
         <br>
         <label class="color" id="uploadMaskLabel" for="uploadMask" style="cursor:pointer;">Upload mask</label>
-        <input class="color" id="uploadMask" type="file" style="display: none;" value="Upload mask" onchange="addMask(this.files[0])"> <button class="color" id="clearMasks" type="button" onclick="clearMasks()">Delete my masks</button>
+        <input class="color" id="uploadMask" type="file" style="display: none;" value="Upload mask" onchange="addMask(this.files[0])">
+        <button class="color" id="clearMasks" type="button" onclick="clearMasks()">Delete my masks</button>
         <br>
         <img width='145' height='145' src='images/1.png' onclick='loadMask(this)' />
         <img width='145' height='145' src='images/2.png' onclick='loadMask(this)' />
@@ -91,14 +92,6 @@
       </div>
     </div>
   </div>
-  <!-- You know what? No. This feature isn't worth it, and it's a mess on mobile...
-  <fieldset class="color" id="myMasks">
-    <legend>My masks</legend>
-    <input id="maskURL" class="color" type="text" placeholder="Mask URL (drag it here)">
-    <button class="color" type="button" onclick="addMask()">Add mask</button>
-    <br id="br">
-  </fieldset>-->
-
   <script src="js/night.js"></script>
   <script src="js/masker.js"></script>
 </body>
