@@ -167,6 +167,10 @@ img:hover{
 	font-size: 1.2em;
 }
 
+#displayRounds:hover{
+	background-color: rgb(233, 187, 144);
+}
+
 #displayRounds:focus{
 	outline:0;
 }
@@ -254,50 +258,7 @@ img:hover{
 #previewImage{
 	display: none;
 }
-/*
-#myMasks{
-	display: none;
-	float: right;
-	position: absolute;
-	right: 5vw;
-	top: 10vh;
-	background:  rgb(247, 229, 205);
-	grid-gap: 10px;
-	grid-template-columns: 325px auto;
-}
 
-#myMasks img{
-	padding: 5px;
-	border: none;
-	margin-left: 20px;
-	cursor: pointer;
-}
-
-
-#myMasks input{
-	width: 80%;
-	margin-left: 20px;
-	height: 20px;
-	text-align: center;
-	border: none;
-	color: white;
-	border: none;
-	background-color: rgb(238, 168, 150);
-}
-
-#myMasks button{
-	width: 80%;
-	margin-left: 20px;
-	margin-top: 10px;
-	height: 20px;
-	border: none;
-	background-color: rgb(236, 140, 116);
-	color: white;
-	cursor: pointer;
-
-
-}
-*/
 #customMaskURL{
 	width: 92%;
 	margin-bottom: 10px;
@@ -363,7 +324,7 @@ body.night{
 	color: rgb(228, 226, 226);
 }
 
-#uploadlabel.night:hover{
+#uploadlabel.night:hover, #displayRounds.night:hover{
 	background-color: rgb(71, 77, 146);
 }
 
