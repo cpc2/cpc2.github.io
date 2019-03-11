@@ -457,7 +457,7 @@ function addMask(file) {
   xhr.onload = function () {
     var gridMasks = document.getElementById("masks");
     var uploadedMask = JSON.parse(xhr.responseText).data.link;
-    gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
+    gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' class=\"myMasks\" src=\"" + uploadedMask + "\" onclick='loadMask(this)' />")
 
     if (localStorage.getItem('masks') == null || localStorage.getItem('masks') == "") {
       localStorage.setItem('images', uploadedMask);
@@ -473,15 +473,19 @@ function addMask(file) {
 }
 
 
-function clearMasks(){
+function clearMasks() {
   localStorage.removeItem("masks");
+  removedMasks = document.getElementsByClassName;
+  for (i=0; i<removedMasks;i++){
+    removedMasks[i].style.display = "none";
+  }
 }
 
 var gridMasks = document.getElementById("masks");
 if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "") {
-var savedMasks = localStorage.getItem("masks");
-var masksArray = savedMasks.split(";");
-for (i=0; i<masksArray.length;i++){
-  gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
-}
+  var savedMasks = localStorage.getItem("masks");
+  var masksArray = savedMasks.split(";");
+  for (i = 0; i < masksArray.length; i++) {
+    gridMasks.insertAdjacentHTML('beforeend', "<img width='145' height='145' src=\"" + masksArray[i] + "\" onclick='loadMask(this)' />")
+  }
 }
