@@ -177,7 +177,7 @@ function loadMask(selectedMask) {
     maskImage.set('left', canvas.width / 2);
     canvas.add(maskImage);
   });
-  
+
   document.getElementById('uploadbutton').disabled = false;
   //it would be better to use a class and hide them in one line
   //Update: this isn't even necessary
@@ -260,10 +260,17 @@ function checkRIS() {
   //"Fix" extra popups getting blocked
   var url = document.getElementById("uploadedUrl").value;
   window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
-  window.open("http://www.tineye.com/search/?url=" + url);
-  window.open("http://www.google.com/searchbyimage?image_url=" + url);
+  var popUp = window.open("http://www.tineye.com/search/?url=" + url);
+  if (popUp == null || typeof (popUp) == 'undefined') {
+    alert('The other RIS sites were blocked by the browser. Please allow popups for this site.');
+  }
+  else {
+    popUp.focus();
+  }
   window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
+  window.open("http://www.google.com/searchbyimage?image_url=" + url);
   
+
   document.getElementById("previewImage").style.display = "none";
   if (imgHeight > imgWidth) {
     canvas.setZoom(1);
