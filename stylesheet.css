@@ -196,7 +196,7 @@ img:hover{
 }
 
 
-#buttons button, #buttons :first-child, #PostReddit2, #delete, #uploadMask, #clearMasks{
+#buttons button, #buttons :first-child, #PostReddit2, #delete, #uploadMaskLabel, #clearMasks{
 	background-color: rgb(236, 140, 116);
 	color: white;
 	border: none;
@@ -294,15 +294,23 @@ img:hover{
 
 }
 */
+#uploadMaskLabel{
+	width: 42%;
+	font-size: 95%;
+}
 
-#uploadMask, #clearMasks{
-	width: 49%;
+#clearMasks{
+	width: 48%;
+	font-size: 95%;
+}
+
+#uploadMaskLabel, #clearMasks{
 	border-radius: 5px;
 	margin-bottom: 5px;
 
 }
 
-#uploadMask:hover, #clearMasks:hover{
+#uploadMaskLabel:hover, #clearMasks:hover{
 	background-color: rgb(240, 161, 142);
 }
 /*Without this input mobile users can't paste URLs*/
@@ -349,11 +357,11 @@ body.night{
 	background-color: rgb(71, 77, 146);
 }
 
-#buttons.night *, #buttons.night :first-child, #uploadMask.night, #clearMasks.night{
+#buttons.night *, #buttons.night :first-child, #uploadMaskLabel.night, #clearMasks.night{
 	background-color: rgb(53, 44, 95);
 }
 
-#buttons.night button:hover, #buttons.night :first-child:hover, #uploadMask.night:hover, #clearMasks.night:hover{
+#buttons.night button:hover, #buttons.night :first-child:hover, #uploadMaskLabel.night:hover, #clearMasks.night:hover{
 	background-color: rgb(71, 77, 146);
 }
 
