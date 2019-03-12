@@ -245,16 +245,27 @@ function copyUrl() {
 
 function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
-  window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
-  var popUp = window.open("http://www.tineye.com/search/?url=" + url);
-  if (popUp == null || typeof (popUp) == 'undefined') {
-    alert('The other RIS sites were blocked by the browser. Please allow popups for this site.');
+  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if (isSafari) {
+    var arrayRIS = ["https://www.yandex.com/images/search?rpt=imageview&img_url=", "http://www.tineye.com/search/?url=", "https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=", "http://www.google.com/searchbyimage?image_url="]
+    for (i=0; i<arrayRIS.length;i++){
+      setTimeout(openRIS(), 2000);
+      function openRIS(){
+        window.open(arrayRIS[i] + url);
+      }
+    }
+  } else {
+    window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
+    var popUp = window.open("http://www.tineye.com/search/?url=" + url);
+    if (popUp == null || typeof (popUp) == 'undefined') {
+      alert('The other RIS sites were blocked by the browser. Please allow popups for this site.');
+    }
+    else {
+      popUp.focus();
+    }
+    window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
+    window.open("http://www.google.com/searchbyimage?image_url=" + url);
   }
-  else {
-    popUp.focus();
-  }
-  window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
-  window.open("http://www.google.com/searchbyimage?image_url=" + url);
 
 
   document.getElementById("previewImage").style.display = "none";
