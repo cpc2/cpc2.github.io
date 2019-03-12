@@ -91,8 +91,6 @@ function loadSourceImage(baseUrl, externalImage) {
       if (img == null) {
         alert("Something went wrong while loading the image.");
       }
-      canvasHeight = img.height * resizeFactor;
-      canvasWidth = img.width * resizeFactor;
       imgHeight = img.height;
       imgWidth = img.width;
 
@@ -115,8 +113,6 @@ function loadSourceImage(baseUrl, externalImage) {
   } else {
     sourceImageUrl = baseUrl;
     fabric.Image.fromURL(sourceImageUrl, function (img) {
-      canvasHeight = img.height * resizeFactor;
-      canvasWidth = img.width * resizeFactor;
       imgHeight = img.height;
       imgWidth = img.width;
       canvas.setHeight(canvasHeight).setWidth(canvasWidth);
@@ -192,7 +188,6 @@ function loadMask(selectedMask) {
 
 function upload() {
   document.getElementById('canvasDiv').style.display = "none";
-  //canvas.isDrawingMode = false;
   document.getElementById('previewImage').style.display = "block";
   updatePreview();
   if (imgHeight > imgWidth) {
