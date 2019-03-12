@@ -247,12 +247,13 @@ function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   if (isSafari) {
-    for (i=0; i<4;i++){
-      setTimeout(function(){
-        var arrayRIS = ["https://www.yandex.com/images/search?rpt=imageview&img_url=", 
-        "http://www.tineye.com/search/?url=", "https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=", "http://www.google.com/searchbyimage?image_url="];
-        window.open(arrayRIS[i] + url)
-      }, 2000);
+    for (i=0; i<3;i++){
+      var arrayRIS = ["https://www.yandex.com/images/search?rpt=imageview&img_url=", 
+      "http://www.tineye.com/search/?url=", "http://www.google.com/searchbyimage?image_url="];
+      setTimeout(openTabs(arrayRIS[i]), 2000);
+      function openTabs(RISurl){
+        window.open(RISurl + url);
+      }
     }
   } else {
     window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
