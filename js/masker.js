@@ -3,9 +3,9 @@ var canvasHeight, canvasWidth;
 var imgHeight, imgWidth;
 var mask = null;
 var canvas = new fabric.Canvas(document.getElementById('canvas'), {
-  isDrawingMode: true
+  isDrawingMode: true,
+  enableRetinaScaling: false
 });
-document.getElementById('container').style.display = "none";
 
 var uploadArea = document.getElementById('uploader');
 uploadArea.ondragover = function (e) { e.preventDefault() }
@@ -94,8 +94,6 @@ function loadSourceImage(baseUrl, externalImage) {
       imgHeight = img.height;
       imgWidth = img.width;
 
-      //canvas.setHeight(canvasHeight).setWidth(canvasWidth);
-
       if (img.height > img.width) {
         canvas.setWidth((img.width * 800) / img.height);
         canvas.setHeight(800);
@@ -122,15 +120,6 @@ function loadSourceImage(baseUrl, externalImage) {
         canvas.setWidth(1100);
         canvas.setHeight((img.height * 1100) / img.width);
       }
-
-      /*
-      if (img.height > img.width) {
-        canvas.setWidth(canvasWidth * 800 / img.height);
-        canvas.setHeight(canvasHeight * 800 / img.height);
-      } else {
-        canvas.setWidth(canvas.width * 1100 / img.width);
-        canvas.setHeight(canvas.height * 1100 / img.width);
-      }*/
 
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
@@ -210,16 +199,7 @@ function upload() {
   setTimeout(imgurUpload, 250);
   function imgurUpload() {
 
-    //var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
-
-    var ratio = window.devicePixelRatio;
-    var img =  document.getElementById('canvas').toDataURL(
-      {
-        format: 'png',
-        multiplier: 1,
-        width: imgWidth / ratio,
-        height: imgHeight / ratio
-      }).split(',')[1];
+    var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
     $.ajax({
       url: 'https://api.imgur.com/3/image',
