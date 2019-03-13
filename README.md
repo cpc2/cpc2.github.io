@@ -1,6 +1,6 @@
 # cpc2.github.io
 
-This is the beta site imagemasker.github.io with updated CSS, mask rotation and experimental features. 
+This is the beta site for imagemasker.github.io. 
 
 ## TODO
 
