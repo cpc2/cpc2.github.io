@@ -1,10 +1,9 @@
-# ImageMasker 2.0
+# cpc2.github.io
 
-This is a fork of imagemasker.github.io with updated CSS, mask rotation and experimental features. 
+This is the beta site imagemasker.github.io with updated CSS, mask rotation and experimental features. 
 
 ## TODO
 
-* Drag and drop files - Not a priority
+* Fix a couple of issues and minor UI detail, but that's it. 
 * More editing tools? (as long as it doesn't get too heavy)
-* "My masks" section with custom uploaded masks? - Tried it and I wasn't too convinced
 * Clean everything, it has become an unoptimized mess
