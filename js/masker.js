@@ -475,7 +475,8 @@ function undo() {
   }
 }
 
-if (localStorage.getItem('masks') != null || localStorage.getItem('masks') != "" || localStorage.getItem('masks') != undefined) {
+if (localStorage.getItem('masks') === null || localStorage.getItem('masks') === "") {}else{
+  //I don't know why I have to do it like this to avoid triggering loadMasks when masks is empty
   loadMasks();
 }
 
