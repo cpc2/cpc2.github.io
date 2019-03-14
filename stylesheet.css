@@ -177,7 +177,7 @@ img:hover{
 	background-color: rgb(233, 187, 144);
 }
 
-#displayRounds:focus{
+#displayRounds:focus, #left:focus, #right:focus{
 	outline:0;
 }
 
@@ -294,6 +294,23 @@ img:hover{
 @media screen and (max-aspect-ratio: 11/16) {
 	#mobilePaste{
 		display: block;
+	}
+
+	#tools, #masks{
+		display: block;
+		position: relative;
+		width:100vw;
+		height: 20vh;
+		left: 5vw;
+	}
+
+	#preview{
+		position: absolute;
+		width: 200vw;
+		top: 60vh;
+	}
+	#canvasDiv{
+		top: 5vh;
 	}
 }
 

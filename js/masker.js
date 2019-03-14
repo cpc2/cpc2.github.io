@@ -134,6 +134,7 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('uploadbutton').style.visibility = "visible";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
+  document.getElementById('night').style.display = "none";
 }
 
 function loadMask(selectedMask) {
