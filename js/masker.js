@@ -508,20 +508,36 @@ $(document).on('keydown', function (e) {
   }
 });
 
-
-
+var opac = 1;
+//Rotate masks with left and right arrows
+//Set opacity of selected object (masks or lines) with up and down arrows
 $(document).on('keydown', function (e) {
   if (event.which == 37) {
     var originalAngle = maskImage.get('angle');
-    maskImage.rotate(originalAngle-2);
+    maskImage.rotate(originalAngle - 2);
     canvas.renderAll();
   }
-});
-
-$(document).on('keydown', function (e) {
   if (event.which == 39) {
     var originalAngle = maskImage.get('angle');
-    maskImage.rotate(originalAngle+2);
+    maskImage.rotate(originalAngle + 2);
+    canvas.renderAll();
+  }
+  if (event.which == 40) {
+    var obj = canvas._objects[canvas._objects.length - 1];
+    //var obj = canvas.getActiveObject();
+    if (opac > 0.1) {
+      opac = opac - 0.1;
+    }
+    obj.set('opacity', opac);
+    canvas.renderAll();
+  }
+  if (event.which == 38) {
+    var obj = canvas._objects[canvas._objects.length - 1];
+    //var obj = canvas.getActiveObject();
+    if (opac <= 1) {
+      opac = opac + 0.1;
+    }
+    obj.set('opacity', opac);
     canvas.renderAll();
   }
 });
