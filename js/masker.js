@@ -135,6 +135,7 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
   document.getElementById('night').style.display = "none";
+  document.getElementById('github').style.display = "none";
 }
 
 function loadMask(selectedMask) {
