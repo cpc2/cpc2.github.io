@@ -15,11 +15,11 @@ body {
     border-radius: 100%;
     transition: 0.5s;
 }
-#night:hover, #github:hover{
+#night:hover{
     background-color: rgb(240, 216, 173);
 }
 
-#night:focus {
+#night:focus, #github:focus {
     outline:0;
 }
 
@@ -29,6 +29,10 @@ body {
 	background-size: contain;
 	width: 40px;
 	height: 40px;
+	background-color: grey;
+}
+
+#github:hover{
 	background-color: rgb(255, 255, 255);
 }
 
@@ -336,11 +340,11 @@ img:hover{
 	#preview{
 		position: absolute;
 		width: 200vw;
-		top: 45vh;
+		top: 49vh;
 		left: 5vh;
 	}
 	#canvasDiv{
-		top: 5vh;
+		top: 7vh;
 	}
 	#alpha, #zoom, #brushSize{
 		height: 50px;
