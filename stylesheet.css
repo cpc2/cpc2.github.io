@@ -290,7 +290,8 @@ img:hover{
 #addMask:hover, #clearMasks:hover{
 	background-color: rgb(240, 161, 142);
 }
-/*Without this input mobile users can't paste URLs*/
+
+/*******mobile layout********/
 @media screen and (max-aspect-ratio: 11/16) {
 	#mobilePaste{
 		display: block;
@@ -299,18 +300,26 @@ img:hover{
 	#tools, #masks{
 		display: block;
 		position: relative;
-		width:100vw;
-		height: 20vh;
+		width:125vw;
+		height: 25vh;
 		left: 5vw;
+	}
+	#masks{
+		height: 20vh;
 	}
 
 	#preview{
 		position: absolute;
 		width: 200vw;
-		top: 60vh;
+		top: 50vh;
+		left: 5vh;
 	}
 	#canvasDiv{
 		top: 5vh;
+	}
+	#alpha, #zoom, #brushSize{
+		height: 50px;
+		width: 90%
 	}
 }
 

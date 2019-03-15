@@ -481,6 +481,7 @@ function loadMasks() {
   }
 }
 
+//*****************Keyboard shortcuts *********************/
 //Disable drawing mode while pressing shift (it allows to drag around the mask and doodles)
 $(document).on('keydown', function (e) {
   if (e.shiftKey) {
@@ -506,16 +507,19 @@ var opac = 1;
 //Set opacity of selected object (masks or lines) with up and down arrows
 $(document).on('keydown', function (e) {
   if (event.which == 37) {
+    event.preventDefault()
     var originalAngle = maskImage.get('angle');
     maskImage.rotate(originalAngle - 2);
     canvas.renderAll();
   }
   if (event.which == 39) {
+    event.preventDefault()
     var originalAngle = maskImage.get('angle');
     maskImage.rotate(originalAngle + 2);
     canvas.renderAll();
   }
   if (event.which == 40) {
+    event.preventDefault()
     var obj = canvas._objects[canvas._objects.length - 1];
     //var obj = canvas.getActiveObject();
     if (opac > 0.1) {
@@ -525,6 +529,7 @@ $(document).on('keydown', function (e) {
     canvas.renderAll();
   }
   if (event.which == 38) {
+    event.preventDefault()
     var obj = canvas._objects[canvas._objects.length - 1];
     //var obj = canvas.getActiveObject();
     if (opac <= 1) {
