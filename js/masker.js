@@ -298,7 +298,7 @@ function colorSelect() {
   canvas.freeDrawingBrush.color = color.value;
 }
 
-function postReddit(oof) {
+function postReddit(oof, subreddit) {
   var request = new XMLHttpRequest();
   request.open("GET", "https://api.picturegame.co/current", true);
   request.onload = () => {
@@ -314,7 +314,7 @@ function postReddit(oof) {
       var imageLink = document.getElementById("displayedImage").src;
       var roundTitle = document.getElementById("displayedTitle").value;
     }
-    var redditLink = "http://www.reddit.com/r/picturegame/submit?url=" + imageLink + "&title=" + round + roundTitle;
+    var redditLink = "http://www.reddit.com/r/" + subreddit + "/submit?url=" + imageLink + "&title=" + round + roundTitle;
     window.open(redditLink);
   }
   request.send();
@@ -490,7 +490,6 @@ $(document).on('keydown', function (e) {
     } else{
       canvas.isDrawingMode = false;
     }
-    
   }
 });
 
@@ -505,6 +504,8 @@ var opac = 1;
 //Rotate masks with left and right arrows
 //Set opacity of selected object (masks or lines) with up and down arrows
 //Clone object with ALT
+//Press "Insert" to choose a custom subreddit
+
 $(document).on('keydown', function (e) {
   if (event.which == 37) {
     event.preventDefault()
@@ -546,8 +547,15 @@ $(document).on('keydown', function (e) {
   }
   if (event.which == 18) {
     var object = fabric.util.object.clone(canvas.getActiveObject());
-    object.set("top", object.top + 5);
-    object.set("left", object.left + 5);
+    object.set("top", object.top + 7);
+    object.set("left", object.left + 7);
     canvas.add(object);
+  }
+  if (e.which === 45) {
+    var newSubInput = document.getElementById('newSubInput');
+    newSubInput.style.display = "inline-block";
+    var newSub = newSubInput.value;
+    var newPost = document.getElementById('PostReddit');
+    newPost.innerText="Post to /r/";
   }
 });

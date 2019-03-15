@@ -4,6 +4,34 @@ body {
 	background-color:rgb(240, 236, 228);
 }
 
+#night, #github{
+	position: absolute;
+	top: 5px;
+	right: 10px;
+    background-color: rgb(240, 214, 181);
+    border: none;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 100%;
+    transition: 0.5s;
+}
+#night:hover, #github:hover{
+    background-color: rgb(240, 216, 173);
+}
+
+#night:focus {
+    outline:0;
+}
+
+#github{
+	right: 70px;
+	background-image: url("images/GitHub.png");
+	background-size: contain;
+	width: 40px;
+	height: 40px;
+	background-color: rgb(255, 255, 255);
+}
+
 #uploadlabel {
     display: block;
 	text-align: center;
@@ -224,7 +252,7 @@ img:hover{
 	background-color: rgb(240, 161, 142);
 }
 
-#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer, #customMaskURL{
+#roundTitle, #uploadedUrl, #displayedTitle, #roundAnswer, #displayedAnswer, #customMaskURL, #newSubInput{
 	border: none;
 	background-color: rgb(238, 168, 150);
 	color: white;
@@ -239,7 +267,7 @@ img:hover{
 	margin-top: 10px;
 }
 
-#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder, #customMaskURL::placeholder, #customMaskURL::placeholder{
+#roundTitle::placeholder, #roundAnswer::placeholder, #displayedTitle::placeholder, #displayedAnswer::placeholder, #customMaskURL::placeholder, #customMaskURL::placeholder, #newSubInput::placeholder{
 	color: rgb(230, 230, 230);
 }
 
@@ -323,24 +351,6 @@ img:hover{
 /*Night mode or: How I learned to stop worrying and added classes to everything.
 Problably not the best way to go about this*/
 
-#night{
-	position: absolute;
-	top: 5px;
-	right: 10px;
-    background-color: rgb(240, 214, 181);
-    border: none;
-    font-size: 1.5em;
-    padding: 5px;
-    border-radius: 100%;
-    transition: 0.5s;
-}
-#night:hover{
-    background-color: rgb(240, 216, 173);
-}
-
-#night:focus {
-    outline:0;
-}
 
 body.night{
 	background-color: rgb(24, 24, 34);
