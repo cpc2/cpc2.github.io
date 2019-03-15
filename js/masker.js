@@ -139,7 +139,7 @@ function loadSourceImage(baseUrl, externalImage) {
 
 function loadMask(selectedMask) {
   thumbURL = selectedMask.src;
-  var url = thumbURL.replace("_thumb","");
+  var url = thumbURL.replace("_thumb", "");
 
   alpha = document.getElementById('alpha').value / 100;
 
@@ -482,16 +482,15 @@ function loadMasks() {
 }
 
 //*****************Keyboard shortcuts *********************/
-//Disable drawing mode while pressing shift (it allows to drag around the mask and doodles)
+//Disable drawing mode with SHIFT, enable it again pressing SHIFT
 $(document).on('keydown', function (e) {
   if (e.shiftKey) {
-    canvas.isDrawingMode = false;
-  }
-});
-
-$(document).on('keyup', function (e) {
-  if (event.which == 16) {
-    canvas.isDrawingMode = true;
+    if(canvas.isDrawingMode == false){
+      canvas.isDrawingMode = true;
+    } else{
+      canvas.isDrawingMode = false;
+    }
+    
   }
 });
 
@@ -505,6 +504,7 @@ $(document).on('keydown', function (e) {
 var opac = 1;
 //Rotate masks with left and right arrows
 //Set opacity of selected object (masks or lines) with up and down arrows
+//Clone object with ALT
 $(document).on('keydown', function (e) {
   if (event.which == 37) {
     event.preventDefault()
@@ -520,8 +520,11 @@ $(document).on('keydown', function (e) {
   }
   if (event.which == 40) {
     event.preventDefault()
-    var obj = canvas._objects[canvas._objects.length - 1];
-    //var obj = canvas.getActiveObject();
+    if (canvas.getActiveObject()){
+      var obj = canvas.getActiveObject();
+    } else{
+      var obj = canvas._objects[canvas._objects.length - 1];
+    }
     if (opac > 0.1) {
       opac = opac - 0.1;
     }
@@ -530,12 +533,21 @@ $(document).on('keydown', function (e) {
   }
   if (event.which == 38) {
     event.preventDefault()
-    var obj = canvas._objects[canvas._objects.length - 1];
-    //var obj = canvas.getActiveObject();
+    if (canvas.getActiveObject()){
+      var obj = canvas.getActiveObject();
+    } else{
+      var obj = canvas._objects[canvas._objects.length - 1];
+    }
     if (opac <= 1) {
       opac = opac + 0.1;
     }
     obj.set('opacity', opac);
     canvas.renderAll();
+  }
+  if (event.which == 18) {
+    var object = fabric.util.object.clone(canvas.getActiveObject());
+    object.set("top", object.top + 5);
+    object.set("left", object.left + 5);
+    canvas.add(object);
   }
 });
