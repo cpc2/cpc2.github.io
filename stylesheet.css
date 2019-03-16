@@ -331,7 +331,7 @@ img:hover{
 	#tools, #masks{
 		display: block;
 		position: relative;
-		width:355%;
+		width:100vw;
 		height: 110%;
 		left: 5vw;
 		top: 3vh;
