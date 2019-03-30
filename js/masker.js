@@ -7,8 +7,6 @@ var canvas = new fabric.Canvas(document.getElementById('canvas'), {
   enableRetinaScaling: false
 });
 
-var i=0;
-
 var uploadArea = document.getElementById('uploader');
 uploadArea.ondragover = function (e) { e.preventDefault() }
 uploadArea.ondrop = function (e) { e.preventDefault(); uploadDragnDrop(e.dataTransfer.files[0]); }
