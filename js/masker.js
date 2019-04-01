@@ -2,7 +2,7 @@ var maskImage = null;
 var canvasHeight, canvasWidth;
 var imgHeight, imgWidth;
 var mask = null;
-var canvas = new fabric.Canvas(document.getElementById('canvas'), {
+var canvas = new fabric.Canvas('canvas', {
   isDrawingMode: true,
   enableRetinaScaling: false
 });
