@@ -44,7 +44,7 @@ function addProxyToUrl(baseUrl) {
 }
 
 function checkURL(url) {
-  if (url.match(/\.(jpeg|jpg|png)/) != null) {
+  if (url.match(/\.(jpeg|jpg|png|gif)/) != null) {
     loadSourceImage(url, true);
   }
 }
