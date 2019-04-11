@@ -25,7 +25,6 @@ $("html").on("paste", function (event) {
       window.open("http://www.tineye.com/search/?url=" + s);
       window.open("http://www.google.com/searchbyimage?image_url=" + s);
     });
-    //alert(text);
   }
   else {
     if (event.originalEvent.clipboardData) {
@@ -540,7 +539,10 @@ var opac = 1;
 //Press "Insert" to choose a custom subreddit
 
 $(document).on('keydown', function (e) {
+  var target = $( event.target );
   if (event.which == 37) {
+    if (target.is("input")){}
+    else{
     event.preventDefault();
     if (document.getElementById("savedRounds").style.display == "block") {
       displaySavedRounds(1);
@@ -550,7 +552,11 @@ $(document).on('keydown', function (e) {
       canvas.renderAll();
     }
   }
+
+  }
   if (event.which == 39) {
+    if(target.is("input")){}
+    else{
     event.preventDefault()
     if (document.getElementById("savedRounds").style.display == "block") {
       displaySavedRounds(2);
@@ -559,6 +565,7 @@ $(document).on('keydown', function (e) {
       maskImage.rotate(originalAngle + 2);
       canvas.renderAll();
     }
+  }
   }
   if (event.which == 40) {
     event.preventDefault()
