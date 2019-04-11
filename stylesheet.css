@@ -275,13 +275,13 @@ img:hover{
 	color: rgb(230, 230, 230);
 }
 
-#mobilePaste{
+#mobilePaste, #mobileRIS{
 	display: none;
 	text-align: center;
 	padding: 20px;
 }
 
-#mobilePaste input{
+#mobilePaste input, #mobileRIS input{
 	background-color :rgb(240, 214, 181);
 	border: none;
 	width: 40vw;
@@ -324,7 +324,7 @@ img:hover{
 
 /*******mobile layout********/
 @media screen and (max-aspect-ratio: 11/16) {
-	#mobilePaste{
+	#mobilePaste, #mobileRIS{
 		display: block;
 	}
 
