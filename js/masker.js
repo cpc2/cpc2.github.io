@@ -15,13 +15,18 @@ canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
 canvas.freeDrawingBrush.width = 10;
 
 $("html").on("paste", function (event) {
-  if (event.target.id === 'mobileRISURL') {
-    var url = document.getElementById("mobileRISURL").value;
-    window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + url);
-    window.open("http://www.tineye.com/search/?url=" + url);
-    window.open("http://www.google.com/searchbyimage?image_url=" + url);
+  if (event.target.id === 'customMaskURL') { }
+  else if (event.target.id === 'mobileRISURL') {
+
+    var items = event.originalEvent.clipboardData.items;
+    var item = items[0];
+    item.getAsString(function (s) {
+      window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + s);
+      window.open("http://www.tineye.com/search/?url=" + s);
+      window.open("http://www.google.com/searchbyimage?image_url=" + s);
+    });
+    //alert(text);
   }
-  else if (event.target.id === 'mobileRIS') { }
   else {
     if (event.originalEvent.clipboardData) {
       var items = event.originalEvent.clipboardData.items;
@@ -139,12 +144,12 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('uploader').style.display = "none";
   document.getElementById('mobilePaste').style.display = "none";
   document.getElementById('mobileRIS').style.display = "none";
-  
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     document.getElementById('container').style.display = "block";
-   } else{
+  } else {
     document.getElementById('container').style.display = "grid";
-   }
+  }
   document.getElementById('uploadbutton').style.display = "block";
   document.getElementById('uploadbutton').style.visibility = "visible";
   document.getElementById('savedRounds').style.display = "none";
@@ -186,7 +191,7 @@ function loadMask(selectedMask) {
     maskImage.set('top', canvas.height / 2);
     maskImage.set('left', canvas.width / 2);
     canvas.add(maskImage);
-  }, {crossOrigin: 'Anonymous'});
+  }, { crossOrigin: 'Anonymous' });
 
   document.getElementById('uploadbutton').disabled = false;
 }
@@ -309,7 +314,7 @@ function updateZoomer() {
   canvas.freeDrawingBrush.width = brushSize.value;
 }*/
 
-$(document).on('input', '#brushSize', function() {
+$(document).on('input', '#brushSize', function () {
   canvas.freeDrawingBrush.width = $(this).val();
 });
 /*var drawingLineWidthEl = $('brushSize');
