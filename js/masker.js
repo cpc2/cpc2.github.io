@@ -265,7 +265,7 @@ function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   if (isSafari) {
-    setTimeout(function () { window.open("https://yandex.com/images/search?source=collections&&url=url" + url + "&rpt=imageview") }, 2000);
+    setTimeout(function () { window.open("https://yandex.com/images/search?url=" + url + "&rpt=imageview") }, 2000);
     setTimeout(function () { window.open("http://www.tineye.com/search/?url=" + url) }, 2000);
     setTimeout(function () { window.open("http://www.google.com/searchbyimage?image_url=" + url) }, 2000);
   } else {
