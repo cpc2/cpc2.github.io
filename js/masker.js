@@ -23,7 +23,7 @@ $("html").on("paste", function (event) {
     item.getAsString(function (s) {
       window.open("http://www.tineye.com/search/?url=" + s);
       window.open("http://www.google.com/searchbyimage?image_url=" + s);
-      window.open("https://www.yandex.com/images/search?rpt=imageview&img_url=" + s);
+      window.open("https://yandex.com/images/search?img_url=" + s + "&rpt=imageview");
     });
   }
   else {
@@ -625,7 +625,7 @@ $(document).on('keydown', function (e) {
     obj.set('opacity', opac);
     canvas.renderAll();
   }
-  if (event.which == 18) {
+    if (event.which == 220) {
     if (canvas.getActiveObject()) {
       var obj = canvas.getActiveObject();
     } else {
