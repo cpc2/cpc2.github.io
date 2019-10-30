@@ -1,0 +1,91 @@
+@font-face {
+  font-family: PermanentMarker;
+  src: url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+}
+
+body{
+  background-color: rgb(28, 27, 41);
+  text-align: center;
+  color: white;
+
+}
+
+#game{
+  width: 40vw;
+  height: 40vw;
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
+
+table{
+  width: 100%;
+  height: 100%;
+}
+
+ul{
+  display:inline-block;
+  text-align:left;
+}
+
+td{
+  text-align: center;
+}
+
+table, tr, td{
+  border: 1px solid black;
+}
+
+.off, .on{
+  width: 100px;
+  user-select: none;
+  background-size: 8vw 8vw;
+  transition: 0.5s;
+}
+
+#sidebar{
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  width: 20vw;
+  height: 100px;
+  text-align: left;
+  font-size: 150%;
+}
+
+#description{
+  display: inline-block;
+  margin-top: 10vh;
+  width: 50vw;
+  padding: 30px;;
+  text-align: center;
+  color: white;
+  background-color: rgb(18, 17, 24);
+}
+
+#finaldiv{
+  display: inline-block;
+  margin-top: 10vh;
+}
+
+.link1{
+  color: grey;
+}
+
+
+h1{
+  font-family: cursive;
+  font-size: 3em;
+}
+
+#imgCont{
+  text-align: right;
+}
+img{
+  width: 450px;
+}
