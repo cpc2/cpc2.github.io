@@ -77,13 +77,13 @@ function requiresMinimize(id, md) {
 function updatePreview() {
   var image = document.getElementById('imagePreview');
   canvas.renderAll();
-  image.src = canvas.toDataURL('image/png', 1.0);
+  image.src = canvas.toDataURL('image/jpeg', 1.0);
 }
 
 function uploadImage(e) {
   var filetype = e.target.files[0].type;
   url = URL.createObjectURL(e.target.files[0]);
-  if (filetype == "image/png" || filetype == "image/png") {
+  if (filetype == "image/png" || filetype == "image/jpeg") {
     loadSourceImage(url, false);
   }
 }
@@ -217,7 +217,7 @@ function upload() {
   setTimeout(imgurUpload, 250);
   function imgurUpload() {
 
-    var img = document.getElementById('canvas').toDataURL('image/png', 1.0).split(',')[1];
+    var img = document.getElementById('canvas').toDataURL('image/jpeg', 1.0).split(',')[1];
 
     $.ajax({
       url: 'https://api.imgur.com/3/image',
