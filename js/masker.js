@@ -217,12 +217,12 @@ function upload() {
 
   setTimeout(imgurUpload, 250);
   function imgurUpload() {
-    var format = 'string/jpeg';
+    var format = 'image/jpeg';
     data_url=canvas.toDataURL("image/png");
     var head = 'data:image/png;base64,';
     var imgFileSize = Math.round((data_url.length - head.length)*3/4) ;
     if(imgFileSize < 3000000){
-      format = 'string/png';
+      format = 'image/png';
     }
 
     var img = document.getElementById('canvas').toDataURL(format, 1.0).split(',')[1];
