@@ -158,6 +158,8 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('displayRounds').style.display = "none";
   document.getElementById('night').style.display = "none";
   document.getElementById('github').style.display = "none";
+
+  document.getElementsByTagName('pre')[0].style.display = "none";
 }
 
 function loadMask(selectedMask, alphaValue) {
