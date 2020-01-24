@@ -180,7 +180,8 @@ img:hover{
 
 #displayedImage{
 	display: inline-block;
-	width: 40vw;
+	max-width: 40vw;
+	max-height: 50vh;
 	margin: 0 auto;
 	
 }

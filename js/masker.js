@@ -428,12 +428,16 @@ function displaySavedRounds(direction) {
       i--;
     } else if (direction == 2) {
       i++;
-    } else if (direction == 0) {
+    } else if (direction == 0) { 
       i = 0;
       if (document.getElementById("savedRounds").style.display == "block") {
         document.getElementById("savedRounds").style.display = "none";
         document.getElementById('saveFromURL').style.display = "block";
         return true;
+      } else{ 
+        setTimeout(function(){
+          window.scrollTo(0,document.body.scrollHeight);
+      }, 100);
       }
 
     }
@@ -441,6 +445,9 @@ function displaySavedRounds(direction) {
 
 
     document.getElementById("savedRounds").style.display = "block";
+
+    var imageLink = document.getElementById("displayedImagelink");
+    imageLink.setAttribute('href', rounds[i][0]);
 
     var image = document.getElementById("displayedImage");
     image.src = rounds[i][0];
