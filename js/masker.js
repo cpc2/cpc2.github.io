@@ -14,6 +14,7 @@ uploadArea.ondrop = function (e) { e.preventDefault(); uploadDragnDrop(e.dataTra
 
 canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
 canvas.freeDrawingBrush.width = 10;
+fabric.textureSize = 4096;
 
 $("html").on("paste", function (event) {
   if (event.target.id === 'customMaskURL' || event.target.id === 'saveFromURLURL') { }
@@ -24,7 +25,8 @@ $("html").on("paste", function (event) {
     item.getAsString(function (s) {
       window.open("http://www.tineye.com/search/?url=" + s);
       window.open("http://www.google.com/searchbyimage?image_url=" + s);
-      window.open("https://yandex.com/images/search?img_url=" + s + "&rpt=imageview");
+      window.open("https://yandex.com/images/search?url=" + s + "&rpt=imageview");
+      window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + s);
     });
   }
   else {
@@ -52,7 +54,7 @@ $("html").on("paste", function (event) {
 });
 
 function addProxyToUrl(baseUrl) {
-  return url = "https://cors-anywhere.herokuapp.com/" + baseUrl.replace(/(^\w+:|^)\/\//, '');
+  return url = "https://cors.bridged.cc/" + baseUrl.replace(/(^\w+:|^)\/\//, '');
 }
 
 function checkURL(url) {
@@ -154,6 +156,8 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('uploadbutton').style.visibility = "visible";
   document.getElementById('Download').style.visibility = "inline-block";
   document.getElementById('Download').style.visibility = "visible";
+  document.getElementById('Copy').style.visibility = "inline-block";
+  document.getElementById('Copy').style.visibility = "visible";
   document.getElementById('savedRounds').style.display = "none";
   document.getElementById('displayRounds').style.display = "none";
   document.getElementById('saveFromURL').style.display = "none";
@@ -161,9 +165,14 @@ function loadSourceImage(baseUrl, externalImage) {
   document.getElementById('github').style.display = "none";
 }
 
-function loadMask(selectedMask, alphaValue) {
-  thumbURL = selectedMask.src;
-  var url = thumbURL.replace("_thumb", "");
+function loadMask(selectedMask, alphaValue, origin,zoom, deform) {
+  if(origin == "country"){
+    url = selectedMask;
+  }else{
+    thumbURL = selectedMask.src;
+    var url = thumbURL.replace("_thumb", "");
+  }
+
 
   alpha = alphaValue / 100;
   document.getElementById("alpha").value = alphaValue;
@@ -190,11 +199,17 @@ function loadMask(selectedMask, alphaValue) {
     if (requiresMinimize(canvasWidth, mask.width) || requiresMinimize(canvasHeight, mask.height)) {
       slider.value = 40;
     }
+    if(zoom != null){
+      slider.value = zoom;
+    }
     maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
     maskImage.set('scaleY', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
 
-    maskImage.rotate(Math.random() * 4 - 2);
-    maskImage.set({ transformMatrix: [1, (Math.random() / 5) - 0.1, (Math.random() / 5) - 0.1, 1, 0, 0] });
+    if(deform != false){
+      maskImage.rotate(Math.random() * 4 - 2);
+      maskImage.set({ transformMatrix: [1, (Math.random() / 5) - 0.1, (Math.random() / 5) - 0.1, 1, 0, 0] });
+    }
+
     maskImage.set('originX', 'center');
     maskImage.set('originY', 'center');
     maskImage.set('top', canvas.height / 2);
@@ -258,6 +273,7 @@ function upload() {
           document.getElementById('roundAnswer').style.display = "inline-block";
           document.getElementById('Save').style.display = "inline-block";
           document.getElementById('Download').style.display = "inline-block";
+          document.getElementById('Copy').style.display = "inline-block";
         } else {
           alert("Failed to upload.");
         }
@@ -278,12 +294,12 @@ function checkRIS() {
   var url = document.getElementById("uploadedUrl").value;
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   if (isSafari) {
-    setTimeout(function () { window.open("https://yandex.com/images/search?img_url=" + url + "&rpt=imageview") }, 2000);
+    setTimeout(function () { window.open("https://yandex.com/images/search?url=" + url + "&rpt=imageview") }, 2000);
     setTimeout(function () { window.open("http://www.tineye.com/search/?url=" + url) }, 2000);
     setTimeout(function () { window.open("http://www.google.com/searchbyimage?image_url=" + url) }, 2000);
     setTimeout(function () { window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url) }, 2000);
   } else {
-    window.open("https://yandex.com/images/search?img_url=" + url + "&rpt=imageview");
+    window.open("https://yandex.com/images/search?url=" + url + "&rpt=imageview");
     var popUp = window.open("http://www.tineye.com/search/?url=" + url);
     if (popUp == null || typeof (popUp) == 'undefined') {
       alert('The other RIS sites were blocked by the browser. Please allow popups for this site.');
@@ -406,6 +422,19 @@ function saveImage(mode) {
 }
 
 function downloadImage() {
+
+
+  updatePreview();
+  if (imgHeight > imgWidth) {
+    canvas.setZoom(imgHeight / 800);
+    canvas.setWidth(imgWidth);
+    canvas.setHeight(imgHeight);
+  } else {
+    canvas.setZoom(imgWidth / 1100);
+    canvas.setWidth(imgWidth);
+    canvas.setHeight(imgHeight);
+  }
+
   var downloadLink = document.createElement('a');
   downloadLink.href = canvas.toDataURL("image/png").replace("image/png");
   var d = new Date();
@@ -415,6 +444,76 @@ function downloadImage() {
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
+
+  if (imgHeight > imgWidth) {
+    canvas.setZoom(1);
+    canvas.setWidth(canvas.width * 800 / imgHeight);
+    canvas.setHeight(canvas.height * 800 / imgHeight);
+  } else {
+    canvas.setZoom(1);
+    canvas.setWidth(canvas.width * (1100 / imgWidth));
+    canvas.setHeight(canvas.height * (1100 / imgWidth));
+  }
+  updatePreview();
+
+}
+
+
+
+function copyImage() {
+
+
+  updatePreview();
+  if (imgHeight > imgWidth) {
+    canvas.setZoom(imgHeight / 800);
+    canvas.setWidth(imgWidth);
+    canvas.setHeight(imgHeight);
+  } else {
+    canvas.setZoom(imgWidth / 1100);
+    canvas.setWidth(imgWidth);
+    canvas.setHeight(imgHeight);
+  }
+
+  blob = dataURItoBlob(canvas.toDataURL("image/png"));
+  const item = new ClipboardItem({ "image/png": blob });
+  navigator.clipboard.write([item]); 
+
+  if (imgHeight > imgWidth) {
+    canvas.setZoom(1);
+    canvas.setWidth(canvas.width * 800 / imgHeight);
+    canvas.setHeight(canvas.height * 800 / imgHeight);
+  } else {
+    canvas.setZoom(1);
+    canvas.setWidth(canvas.width * (1100 / imgWidth));
+    canvas.setHeight(canvas.height * (1100 / imgWidth));
+  }
+  updatePreview();
+
+}
+
+function dataURItoBlob(dataURI) {
+  // convert base64 to raw binary data held in a string
+  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+  var byteString = atob(dataURI.split(',')[1]);
+
+  // separate out the mime component
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+  // write the bytes of the string to an ArrayBuffer
+  var ab = new ArrayBuffer(byteString.length);
+
+  // create a view into the buffer
+  var ia = new Uint8Array(ab);
+
+  // set the bytes of the buffer to the correct values
+  for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+  }
+
+  // write the ArrayBuffer to a blob, and you're done
+  var blob = new Blob([ab], {type: mimeString});
+  return blob;
+
 }
 
 var i = 0;
@@ -549,11 +648,10 @@ $("#invert").click(function () {
     })
   }
   selectObject(ObjectName);
-  var obj = canvas.getActiveObject();
-  obj.filters[1] = new fabric.Image.filters.Invert();
-  //obj.filter = filter;
-  obj.applyFilters();
-  //canvas.requestRenderAll();
+  var object = canvas.getActiveObject();
+  var filter = new fabric.Image.filters.Invert();
+  object.filters.push(filter);
+  object.applyFilters();
   canvas.renderAll();
 });
 
@@ -673,17 +771,6 @@ $(document).on('keydown', function (e) {
 });
 
 
-//Retrieve round images under the previous system
-if ((localStorage.getItem('images') != null || localStorage.getItem('images') != "") && localStorage.getItem('transferred') == null) {
-  var images = localStorage.getItem('images').split(";");
-  var rounds = JSON.parse(localStorage.getItem('rounds'))
-  for (i = 0; i < images.length; i++) {
-    rounds.push([images[i], "", ""])
-  }
-  localStorage.setItem('rounds', JSON.stringify(rounds));
-  localStorage.setItem('transferred', "a");
-}
-
 function updateInfo() {
   var roundTitle = document.getElementById("displayedTitle").value
   var roundAnswer = document.getElementById("displayedAnswer").value;
@@ -702,3 +789,10 @@ function displaySaveURL() {
     document.getElementById("saveExternalURL").style.display = "none";
   }
 }
+
+
+
+
+$("#country").on('change', function() {
+  loadMask(this.value, 75, "country", 25, false);
+});
