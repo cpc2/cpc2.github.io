@@ -222,8 +222,8 @@ function loadMask(selectedMask, alphaValue, origin, zoom, deform) {
 }
 
 function upload() {
-  /*document.getElementById('canvasDiv').style.display = "none";
-  document.getElementById('previewImage').style.display = "block";*/
+  document.getElementById('canvasDiv').style.display = "none";
+  document.getElementById('previewImage').style.display = "block";
   updatePreview();
   if (imgHeight > imgWidth) {
     canvas.setZoom(imgHeight / 800);
@@ -261,6 +261,8 @@ function upload() {
         alert("Error uploading to Imgur. Reason: " + response.responseJSON.data.error);
         document.getElementById('uploadbutton').value = "Upload to Imgur";
         document.getElementById('uploadbutton').disabled = false;
+        document.getElementById('canvasDiv').style.display = "block";
+        document.getElementById('previewImage').style.display = "none";
         if (imgHeight > imgWidth) {
           canvas.setZoom(1);
           canvas.setWidth(canvas.width * 800 / imgHeight);
@@ -272,6 +274,9 @@ function upload() {
         }
       },
       success: function (response) {
+        document.getElementById('canvasDiv').style.display = "block";
+        document.getElementById('previewImage').style.display = "none";
+        document.getElementById('uploadbutton').disabled = false;
         if (imgHeight > imgWidth) {
           canvas.setZoom(1);
           canvas.setWidth(canvas.width * 800 / imgHeight);
