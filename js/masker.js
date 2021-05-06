@@ -335,22 +335,6 @@ function checkRIS() {
     window.open("https://www.bing.com/images/searchbyimage?cbir=ssbi&imgurl=" + url);
     window.open("http://www.google.com/searchbyimage?image_url=" + url);
   }
-
-
-  document.getElementById("previewImage").style.display = "none";
-  if (imgHeight > imgWidth) {
-    canvas.setZoom(1);
-    canvas.setWidth(canvas.width * 800 / imgHeight);
-    canvas.setHeight(canvas.height * 800 / imgHeight);
-  } else {
-    canvas.setZoom(1);
-    canvas.setWidth(canvas.width * (1100 / imgWidth));
-    canvas.setHeight(canvas.height * (1100 / imgWidth));
-  }
-  document.getElementById('canvasDiv').style.display = "block";
-  document.getElementById('uploadbutton').style.display = "block";
-  document.getElementById('uploadbutton').disabled = false;
-  document.getElementById('uploadbutton').value = "Reupload";
 }
 
 function updateOpacity() {
@@ -361,6 +345,29 @@ function updateOpacity() {
   canvas.renderAll();
 }
 
+function updateHue() {
+  var firstHue = true;
+  var hueIndex;
+  var slider = document.getElementById("hue");
+
+  if(maskImage.filters.length > 0){
+    for(var i = 0; i < maskImage.filters.length; i++){
+      if(maskImage.filters[i].hasOwnProperty("rotation")){
+          firstHue = false;
+          hueIndex = i;
+      }
+    }
+  }
+  if (maskImage.filters.length == 0 || firstHue){
+    var filter = new fabric.Image.filters.HueRotation({rotation: slider.value,});
+    maskImage.filters.push(filter);
+  }else{
+    maskImage.filters[hueIndex]["rotation"] = slider.value;
+  }  
+  maskImage.applyFilters();
+  canvas.renderAll();
+}
+
 function updateZoomer() {
   var slider = document.getElementById("zoom");
   maskImage.set('scaleX', 0.25 * Math.pow(Math.E, 0.0277 * slider.value));
@@ -368,21 +375,9 @@ function updateZoomer() {
   canvas.renderAll();
 }
 
-/*function brushSize() {
-  var brushSize = document.getElementById("brushSize");
-  canvas.freeDrawingBrush.width = brushSize.value;
-}*/
-
 $(document).on('input', '#brushSize', function () {
   canvas.freeDrawingBrush.width = parseInt($(this).val());
 });
-/*var drawingLineWidthEl = $('brushSize');
-if (canvas.freeDrawingBrush) {
-  canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-};
-drawingLineWidthEl.onchange = function() {
-  canvas.freeDrawingBrush.width = drawingLineWidthEl.value;
-};*/
 
 function colorSelect() {
   var color = document.getElementById("colorSelect");
@@ -393,9 +388,9 @@ function postReddit(index, subreddit) {
   var request = new XMLHttpRequest();
   request.open("GET", "https://api.picturegame.co/current", true);
   request.onload = () => {
-    var text = request.responseText
-    var i = text.search("roundNumber\":");
-    var roundNumber = text.substr(i + 13, 5);
+    var textResponse = request.responseText;
+    var jsonResponse = JSON.parse(textResponse);
+    var roundNumber = jsonResponse["round"]["roundNumber"];
     var nextRound = parseInt(roundNumber) + 1;
     var round = "[Round " + nextRound + "] ";
     if (index == 2) {
@@ -666,8 +661,7 @@ var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
   'polaroid', 'blend-color', 'gamma', 'kodachrome',
   'blackwhite', 'blend-image', 'hue', 'resize'];
 
-$("#invert").click(function () {
-  //alert("beep boop");
+function invert(){
   ObjectName = 'mask';
   function selectObject(ObjectName) {
     canvas.getObjects().forEach(function (o) {
@@ -682,7 +676,7 @@ $("#invert").click(function () {
   object.filters.push(filter);
   object.applyFilters();
   canvas.renderAll();
-});
+}
 
 
 if (localStorage.getItem('masks') === null || localStorage.getItem('masks') === "") { } else {

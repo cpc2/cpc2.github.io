@@ -69,7 +69,12 @@
           Brush size and color: <br>
           <input type="range" min="1" max="50" value="10" id="brushSize">
           <input id="colorSelect" type="color" oninput="colorSelect()"> <br>
-          <button id="invert" class="color night" id="invert" type="button">Invert colors</button><br>
+          
+        </div>
+        <div id="hueSlider">
+          Set mask hue: <br>
+          <input type="range" min="0" max="2" value="0" step="0.002" id="hue" oninput="updateHue()">
+          <button type="button" class="color night" id="undo" onclick="invert()">Invert</button>
         </div>
 
 
@@ -150,6 +155,7 @@
           <option value="https://i.imgur.com/fOAmFaN.png">Fiji</option>
           <option value="https://i.imgur.com/rzgDst5.png">Finland</option>
           <option value="https://i.imgur.com/Lmf8i6X.png">France</option>
+          <option value="https://i.imgur.com/5CmVBeq.png">Funwaa</option>
           <option value="https://i.imgur.com/rBeWJMy.png">Gabon</option>
           <option value="https://i.imgur.com/5Cojiqp.png">Gambia</option>
           <option value="https://i.imgur.com/fTnz8Di.png">Georgia</option>
@@ -232,6 +238,7 @@
           <option value="https://i.imgur.com/FmGja4s.png">Papua New Guinea</option>
           <option value="https://i.imgur.com/LfF1pOc.png">Paraguay</option>
           <option value="https://i.imgur.com/YBd252A.png">Peru</option>
+          <option value="https://i.imgur.com/oIM6111.png">PictureGame</option>
           <option value="https://i.imgur.com/Z60mNV7.png">Philippines</option>
           <option value="https://i.imgur.com/2G6pAs9.png">Poland</option>
           <option value="https://i.imgur.com/EOiaV1O.png">Portugal</option>
@@ -326,7 +333,7 @@
         <input type="text" id="newSubInput" placeholder="Subreddit" value="picturegame" style="display: none;">
         <button type="button" id="Save" onclick="saveImage(1)" style="display: none;">Save round</button>
         <button type="button" id="Copy" onclick="copyImage()">Copy to clipboard (HQ)</button>
-        <button type="button" id="Download" onclick="downloadImage()">Download image (HQ)</button>
+        <button type="button" id="Download" onclick="downloadImage()" style="margin-top: 5px;">Download image (HQ)</button>
 
       </div>
       <div id="previewImage">
