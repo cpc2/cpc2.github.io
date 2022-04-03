@@ -440,6 +440,10 @@ function saveImage(mode) {
   var button = document.getElementById(saveElement);
   button.innerText = "Saved!";
   button.style.backgroundColor = "rgb(175, 211, 161)";
+
+  if(mode == 1){
+    copyYml(2);
+  }
 }
 
 function downloadImage() {
@@ -819,10 +823,17 @@ $("#country").on('change', function () {
   loadMask(this.value, 75, "country", 25, false);
 });
 
-function copyYml() {
-  var roundTitle = document.getElementById("displayedTitle").value;
-  var roundAnswer = document.getElementById("displayedAnswer").value;
-  var imageLink = document.getElementById("displayedImagelink").href;
+function copyYml(mode) {
+  if(mode == 1){
+    var roundTitle = document.getElementById("displayedTitle").value;
+    var roundAnswer = document.getElementById("displayedAnswer").value;
+    var imageLink = document.getElementById("displayedImagelink").href;
+  }else{
+    var roundTitle = document.getElementById("roundTitle").value;
+    var roundAnswer = document.getElementById("roundAnswer").value;
+    var imageLink = document.getElementById("uploadedUrl").value;
+  }
+
 
   var text = 
 `masker_round_${Date.now()}:
@@ -834,7 +845,7 @@ function copyYml() {
   var el = document.createElement('textarea');
   // Set value (string to be copied)
   el.value = text;
-
+  
   // Set non-editable to avoid focus and move outside of view
   el.setAttribute('readonly', '');
   el.style = {position: 'absolute', left: '-9999px'};
@@ -842,10 +853,10 @@ function copyYml() {
 
   // Select text inside element
   el.select();
-
+  
   // Copy text to clipboard
   document.execCommand('copy');
-
+  
   // Remove temporary element
   document.body.removeChild(el);
-} 
+}
