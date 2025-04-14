@@ -174,7 +174,7 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px 15px;
         justify-items: center;
-        margin-bottom: 1em;
+        margin-bottom: 1.5em;
     }
 
     .webring-links .separator {
