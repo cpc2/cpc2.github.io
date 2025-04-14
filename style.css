@@ -1,0 +1,198 @@
+:root {
+    --background-color: #0a0a0a;
+    --text-color: #22dd44;
+    --glow-color: rgba(34, 221, 68, 0.4);
+
+    --cursor-blink-speed: 1.2s;
+    --font-family: 'VT323', 'Courier New', Courier, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.35) 50%
+    );
+    background-size: 100% 3px;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 100px 40px rgba(0,0,0,0.6);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.terminal {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    z-index: 0;
+    text-shadow: 0 0 5px var(--glow-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.output {
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.main-message {
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+#cursor {
+    display: inline-block;
+    background-color: var(--text-color);
+    width: 0.5em;
+    height: 0.8em;
+    vertical-align: middle;
+    margin-bottom: 0.1em;
+    margin-left: 0.1em;
+    animation: blink var(--cursor-blink-speed) step-end infinite;
+}
+
+@keyframes blink {
+    from, to { background-color: transparent; }
+    50% { background-color: var(--text-color); }
+}
+
+
+footer {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px 0 10px 0;
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.9rem;
+    z-index: 0;
+    border-top: 1px dashed rgba(34, 221, 68, 0.4);
+    text-shadow: 0 0 3px var(--glow-color);
+    color: var(--text-color);
+}
+
+.webring-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.webring-icon {
+    height: 24px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.webring-links {
+    margin-top: 10px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.webring-links a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.webring-links a:hover,
+.webring-links a:focus {
+    background-color: var(--text-color);
+    color: var(--background-color);
+    outline: none;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+.webring-links .separator {
+    margin: 0 5px;
+    opacity: 0.6;
+}
+
+@media (orientation: portrait)  {
+    .main-message {
+        font-size: 2rem;
+    }
+    .terminal {
+        padding: 10px;
+    }
+    footer {
+        font-size: 0.8rem;
+        padding: 15px 0 10px 0;
+    }
+
+    .webring-links {
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 15px;
+        justify-items: center;
+        margin-bottom: 1em;
+    }
+
+    .webring-links .separator {
+        display: none;
+    }
+
+    .webring-links a {
+        padding: 3px 5px;
+        text-align: center;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .webring-icon {
+        height: 20px;
+    }
+
+     body {
+        overflow-x: hidden;
+     }
+}
