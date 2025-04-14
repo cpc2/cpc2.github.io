@@ -166,6 +166,7 @@ footer {
     footer {
         font-size: 0.8rem;
         padding: 15px 0 10px 0;
+        margin-bottom: 2em;
     }
 
     .webring-links {
@@ -174,7 +175,6 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px 15px;
         justify-items: center;
-        margin-bottom: 1.5em;
     }
 
     .webring-links .separator {
